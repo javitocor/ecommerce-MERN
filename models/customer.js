@@ -23,6 +23,7 @@ var CustomerSchema = new Schema({
 
 CustomerSchema.pre('remove', function(next) {
   this.model('Order').deleteMany({ customer: this._id });
+  this.model('ShippingAddress').deleteMany({ customer: this._id });
   next();
 });
 
