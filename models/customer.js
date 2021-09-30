@@ -11,7 +11,14 @@ var CustomerSchema = new Schema({
     password: {type: String, required: true, min: 5},
     phone: {type: Number, default: null},
     role: {type: Schema.ObjectId, ref: 'Role'},
-    email: {type: String, unique: true},
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+      trim: true,
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+      required: [true, 'Email required']
+    },
 });
 
 CustomerSchema.pre('remove', function(next) {
