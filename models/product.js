@@ -10,11 +10,6 @@ var ProductSchema = new Schema({
     category: [{type: Schema.ObjectId, ref: 'Category'}]
 });
 
-ProductSchema.pre('remove', function(next) {
-  this.model('Ticket').deleteMany({ event_id: this._id });
-  next();
-});
-
 
 // Export model.
 module.exports = mongoose.model('Product', ProductSchema);
