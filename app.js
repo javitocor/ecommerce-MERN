@@ -49,6 +49,10 @@ app.use(compression());
 //app.use(express.static(path.join(__dirname, './frontend/build/')));
 app.use('/public', express.static('public'));
 
+//view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use('/api/customers', customersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/orders', ordersRouter);

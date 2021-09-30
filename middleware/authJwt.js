@@ -13,13 +13,13 @@ exports.verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: "Unauthorized!" });
     }
-    req.customer._id = decoded.id;
+    req.customerId = decoded.id;
     next();
   });
 };
 
 exports.isAdmin = (req, res, next) => {
-  Customer.findById(req.customer._id).exec((err, customer) => {
+  Customer.findById(req.customerId).exec((err, customer) => {
     if (err) {
       res.status(500).json({ message: err });
       return;
