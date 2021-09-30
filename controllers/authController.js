@@ -13,7 +13,7 @@ exports.signup_post = (req, res) => {
       res.status(500).json({ message: err });
       return;
     } else {  
-      res.json({ message: "User was registered successfully!" });
+      res.json({ message: "Customer was registered successfully!" });
     }
   });
 };
