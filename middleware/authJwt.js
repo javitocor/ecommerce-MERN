@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const Customer = require("../models/customer");
 const Role = require("../models/role");
 
-verifyToken = (req, res, next) => {
+exports.verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
@@ -18,7 +18,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
+exports.isAdmin = (req, res, next) => {
   Customer.findById(req.customer._id).exec((err, customer) => {
     if (err) {
       res.status(500).json({ message: err });
@@ -46,10 +46,3 @@ isAdmin = (req, res, next) => {
   });
 };
 
-
-const authJwt = {
-  verifyToken,
-  isAdmin,
-};
-
-module.exports = authJwt;

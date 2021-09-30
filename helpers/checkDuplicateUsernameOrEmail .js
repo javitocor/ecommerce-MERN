@@ -1,6 +1,6 @@
 var Customer = require('../models/customer');
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+exports.checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   Customer.findOne({
     username: req.body.username
@@ -33,5 +33,3 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     });
   });
 };
-
-module.exports = checkDuplicateUsernameOrEmail;

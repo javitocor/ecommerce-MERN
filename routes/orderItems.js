@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const validations = require('../middleware/validations');
+const authJwt = require('../middleware/authJwt');
 
 var orderItem_controller = require('../controllers/orderItemController');
 
-router.get('/:id', orderItem_controller.orderItem_detail);
-router.post('/create', orderItem_controller.orderItem_create);
-router.put('/:id', orderItem_controller.orderItem_update);
-router.delete('/:id', orderItem_controller.orderItem_delete);
+router.get('/:id', [authJwt.verifyToken], orderItem_controller.orderItem_detail);
+router.post('/create', [authJwt.verifyToken], orderItem_controller.orderItem_create);
+router.put('/:id', [authJwt.verifyToken], orderItem_controller.orderItem_update);
+router.delete('/:id', [authJwt.verifyToken], orderItem_controller.orderItem_delete);
 
 module.exports = router;

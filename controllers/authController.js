@@ -46,6 +46,7 @@ exports.login_post = async (req, res, next) => {
     res.status(500).json({ message: error });
   }  
 };
+
 exports.logout_get = (req, res) => {
   req.logout();
   res.json({message: 'Logged out succesfully!'});
