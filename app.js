@@ -14,6 +14,7 @@ var ordersRouter = require('./routes/orders');
 var orderItemsRouter = require('./routes/orderItems');
 var shippingAddressRouter = require('./routes/shippingAddress');
 var authRouter = require('./routes/auth');
+var categoryRouter = require('./routes/category');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/orders', ordersRouter);
 app.use('/api/orderItems', orderItemsRouter);
 app.use('/api/shippingAddress', shippingAddressRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/category', categoryRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './frontend/build/index.html'));
