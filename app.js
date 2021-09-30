@@ -19,7 +19,7 @@ var rolesRouter = require('./routes/roles');
 
 var app = express();
 
-var seedRole = require('./helpers/seedRole');
+var seedRole = require('./helpers/seedRoles');
 // Set up mongoose connection
 var mongoose = require('mongoose');
 var dev_db_url = process.env.MONGODB_URI;
