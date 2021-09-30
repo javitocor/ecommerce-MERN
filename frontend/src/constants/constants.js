@@ -2,7 +2,7 @@ export const URL_BASIC = '/api/';
 
 export const initialStateAuth = {
   loggedIn: false,
-  user: null
+  customer: null
 };
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";

@@ -25,7 +25,7 @@ const ProtectedRoute = (props) => {
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.auth.loggedIn,
-    user: state.auth.user
+    customer: state.auth.customer
   };
 };
 

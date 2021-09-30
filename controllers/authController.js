@@ -35,11 +35,9 @@ exports.login_post = async (req, res, next) => {
       expiresIn: 631139040 // 20 years
     });
     
-    const authorities = 'ROLE_' + customer.role.name;
 
     res.status(200).json({
       customer,
-      role: authorities,
       accessToken: token
     });
   } catch (error) {
