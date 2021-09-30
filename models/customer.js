@@ -5,7 +5,7 @@ const Role = require('../models/role');
 var Schema = mongoose.Schema;
 
 var CustomerSchema = new Schema({
-    userrname: {type: String, required: true, min:3, unique: true},
+    username: {type: String, required: true, min:3, unique: true},
     firstname: {type: String, min:3, default: null},
     lastname: {type: String, min:3, default: null},
     password: {type: String, required: true, min: 5},
