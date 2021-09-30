@@ -19,11 +19,17 @@ var rolesRouter = require('./routes/roles');
 
 var app = express();
 
+var seedRole = require('./helpers/seedRole');
 // Set up mongoose connection
 var mongoose = require('mongoose');
 var dev_db_url = process.env.MONGODB_URI;
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log('MongoDB has connected successfully.'));
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true},
+   () => {
+     console.log('MongoDB has connected successfully.')
+     seedRole.initial();
+    }
+);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
