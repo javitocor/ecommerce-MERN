@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import Login from '../containers/Login';
+import Signup from '../containers/Signup';
+import NavBar from '../containers//NavBar';
+import Home from '../containers/Home';
+import ProtectedRoute from '../containers/ProtectedRoute';
+import history from '../history';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <Router history={history}>
+    <Switch>
+      <>
+        <Route path="/" component={NavBar} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <ProtectedRoute exact path="/" component={} />
+      </>
+    </Switch>
+  </Router>
+);
 
 export default App;
