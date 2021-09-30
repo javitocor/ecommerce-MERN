@@ -7,6 +7,8 @@ var OrderItemSchema = new Schema({
   order: {type: Schema.ObjectId, ref: 'Order', required: true},
   quantity: {type: Number, min: 1, required: true},
   date_added: {type: Date, default: Date.now},
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 });
 
 

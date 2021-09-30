@@ -10,6 +10,8 @@ var ShippingAddressSchema = new Schema({
   state: {type: String},
   zipcode: {type: String},
   date_added: {type: Date, default: Date.now},
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 });
 
 

@@ -7,7 +7,9 @@ var ProductSchema = new Schema({
     price: {type: Number, required: true},
     stock: {type: Number, required: true},
     image: {type: String},
-    category: [{type: Schema.ObjectId, ref: 'Category'}]
+    category: [{type: Schema.ObjectId, ref: 'Category'}],
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: Date.now },
 });
 
 

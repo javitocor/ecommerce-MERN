@@ -19,6 +19,8 @@ var CustomerSchema = new Schema({
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
       required: [true, 'Email required']
     },
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: Date.now },
 });
 
 CustomerSchema.pre('remove', function(next) {
