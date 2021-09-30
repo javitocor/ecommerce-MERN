@@ -10,5 +10,10 @@ var OrderSchema = new Schema({
     updated_at: { type: Date, default: Date.now },
 });
 
+OrderSchema.pre('remove', function(next) {
+    this.model('OrderItem').deleteMany({ customer: this._id });
+    next();
+  });
+
 // Export model.
 module.exports = mongoose.model('Order', OrderSchema);
