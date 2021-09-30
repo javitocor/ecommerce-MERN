@@ -34,7 +34,7 @@ exports.login_post = async (req, res, next) => {
     const token = jwt.sign({ id: customer._id }, process.env.SECRETORKEY, {
       expiresIn: 631139040 // 20 years
     });
-    console.log(customer.role.name)
+    
     const authorities = 'ROLE_' + customer.role.name;
 
     res.status(200).json({

@@ -30,9 +30,13 @@ exports.customer_update = async (req, res, next) => {
       });
     };
     try {
-      const customer = await Customer.findByIdAndUpdate(req.params.id, { $set: req.body, updated_at: Date.now() }, {new: true});
-      res.status(200);
-      res.json({message: 'Customer updated successfully', customer});
+      if (req.customerId === req.params.id) {
+        const customer = await Customer.findByIdAndUpdate(req.params.id, { $set: req.body, updated_at: Date.now() }, {new: true});
+        res.status(200);
+        res.json({message: 'Customer updated successfully', customer});
+      }
+      res.status(403);
+      res.json({message: 'Only admin can update this customer'});
     } catch (error) {
       console.log(error)
       next();
