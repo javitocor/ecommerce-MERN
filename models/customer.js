@@ -42,8 +42,8 @@ CustomerSchema.pre('save', async function(next) {
 );
 
 CustomerSchema.methods.isValidPassword = async function(password) {
-  const Customer = this;
-  const compare = await bcrypt.compare(password, Customer.password);
+  const customer = this;
+  const compare = await bcrypt.compare(password, customer.password);
 
   return compare;
 }
