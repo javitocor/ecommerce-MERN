@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var upload = require('../middleware/imageUpload');
 const validations = require('../middleware/validations');
 
 var customer_controller = require('../controllers/customerController');
