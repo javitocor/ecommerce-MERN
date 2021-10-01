@@ -9,6 +9,7 @@ import * as categories from '../actions/categories';
 import * as orderItems from '../actions/orderItems';
 import * as shippingAddress from '../actions/shippingAddress';
 import {setMessage} from '../actions/message';
+import authHeader from "./authHeader";
 
 export const AllCall = (route) => async dispatch => {
   const url = `${URL_BASIC + route}`;
@@ -184,3 +185,66 @@ export const DeleteCall = (route, token, id) => async dispatch => {
     }   
   }
 };
+
+export const CreateCall = (route, token, data) => async dispatch => {
+  const url = `${URL_BASIC + route}`
+  try {
+    if(route==='customers'){
+      dispatch(customers.customersPending());
+    } else if (route==='products') {
+      dispatch(products.productsPending());
+    } else if (route==='orders'){
+      dispatch(orders.ordersPending());
+    } else if (route==='role'){
+      dispatch(roles.rolesPending());
+    } else if (route==='category'){
+      dispatch(categories.categoriesPending());
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsPending());
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.shippingAddressesPending());
+    }      
+
+    const response = await fetch(`${url}/create`, {
+      method: 'POST',
+      headers: {
+        'X-CSRF-Token': token,
+      },
+      body: data,
+    });
+    const newData = await response.json();
+    if(route==='customers'){
+      dispatch(customers.createCustomer(newData.customer));
+    } else if (route==='products') {
+      dispatch(products.createProduct(newData.product));
+    } else if (route==='orders'){
+      dispatch(orders.createOrder(newData.order));
+    } else if (route==='role'){
+      dispatch(roles.createRole(newData.role));
+    } else if (route==='category'){
+      dispatch(categories.createCategory(newData.category));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.createOrderItem(newData.OrderItem));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.createShippingAddress(newData.shippingAddress));
+    }         
+    return newData;
+  } catch (error) {
+    if(route==='customers'){
+      dispatch(customers.customerssError(error));
+    } else if (route==='products') {
+      dispatch(products.productsError(error));
+    } else if (route==='orders'){
+      dispatch(orders.ordersError(error));
+    } else if (route==='role'){
+      dispatch(roles.rolesError(error));
+    } else if (route==='category'){
+      dispatch(categories.categoriesError(error));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsError(error));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.ShippingAddressesError(error));
+    }   
+  }
+};
+
