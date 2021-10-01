@@ -11,8 +11,10 @@ var OrderItemSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-OrderItemSchema.methods.getTotalPrice = function() {
-  const total = this.product.price * this.quantity;
+const Product = require('./product');
+OrderItemSchema.methods.getTotalPrice = async function() {
+  const product = await Product.findById(this.product);
+  const total = product.price * this.quantity;
   return total;
 }
 
