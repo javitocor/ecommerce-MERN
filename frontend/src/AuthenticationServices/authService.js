@@ -50,7 +50,7 @@ export const customerLogin = (email, password) => async (dispatch) => {
     const data = await response.json();
     if (data.accessToken) {
       addCustomer(data);
-      dispatch(login(data.customer));
+      dispatch(login(data));
     }
     return data;
   } catch (error) {
