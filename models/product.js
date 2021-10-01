@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ProductSchema = new Schema({
-    name: {type: String, required: true, min: 3, max: 20},
+    name: {type: String, required: true, minLength: 3, maxLength: 20},
+    description: {type: String, minLength: 15, maxLength: 500},
     price: {type: Number, required: true},
     stock: {type: Number, required: true},
     image: {type: String},
