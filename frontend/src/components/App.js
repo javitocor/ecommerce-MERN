@@ -4,6 +4,8 @@ import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import NavBar from "../containers/NavBar";
 import Home from '../containers/Home';
+import ProductDetail from '../containers/ProductDetail';
+import Checkout from '../containers/Checkout';
 import AdminPanel from '../containers/AdminPanel';
 import ProtectedRoute from '../containers/ProtectedRoute';
 import history from '../history';
@@ -14,6 +16,8 @@ const App = () => (
       <>
         <Route path="/" component={NavBar} />
         <Route exact path="/" component={Home} />
+        <Route exact path="/product/:name" component={ProductDetail} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
