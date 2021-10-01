@@ -11,7 +11,7 @@ import * as shippingAddress from '../actions/shippingAddress';
 import {setMessage} from '../actions/message';
 import authHeader from "./authHeader";
 
-export const AllCall = (route) => async dispatch => {
+export const AllCall = (route, customer) => async dispatch => {
   const url = `${URL_BASIC + route}`;
   try {
     if(route==='customers'){
@@ -30,7 +30,7 @@ export const AllCall = (route) => async dispatch => {
       dispatch(shippingAddress.shippingAddressesPending());
     }                 
 
-    const response = await fetch(url, { mode: 'cors'});
+    const response = await fetch(url, { mode: 'cors',   headers: authHeader(customer) });
     const data = await response.json();
     if(route==='customers'){
       dispatch(customers.getAllCustomers(data));
@@ -68,7 +68,7 @@ export const AllCall = (route) => async dispatch => {
   }
 };
 
-export const SingleCall = (route, id) => async dispatch => {
+export const SingleCall = (route, id, customer) => async dispatch => {
   const Url = `${URL_BASIC + route}`;
   try {
     if(route==='customers'){
@@ -87,7 +87,7 @@ export const SingleCall = (route, id) => async dispatch => {
       dispatch(shippingAddress.shippingAddressesPending());
     }      
 
-    const response = await fetch(`${Url}/${id}`, { mode: 'cors' });
+    const response = await fetch(`${Url}/${id}`, { mode: 'cors',   headers: authHeader(customer) });
     const data = await response.json();
     if(route==='customers'){
       dispatch(customers.getSingleCustomer(data));
@@ -125,7 +125,7 @@ export const SingleCall = (route, id) => async dispatch => {
   }
 };
 
-export const DeleteCall = (route, token, id) => async dispatch => {
+export const DeleteCall = (route, token, id, customer) => async dispatch => {
   const url = `${URL_BASIC + route}`
   try {
     if(route==='customers'){
@@ -143,13 +143,14 @@ export const DeleteCall = (route, token, id) => async dispatch => {
     } else if (route==='shippingAddress'){
       dispatch(shippingAddress.shippingAddressesPending());
     }        
-
+    const tokenHeader = authHeader(customer)
     const response = await fetch(`${url}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-Token': token,
+        'x-access-token': tokenHeader['x-access-token']
       },
     });
     const newData = await response.json();
@@ -190,7 +191,7 @@ export const DeleteCall = (route, token, id) => async dispatch => {
   }
 };
 
-export const CreateCall = (route, token, data) => async dispatch => {
+export const CreateCall = (route, token, data, customer) => async dispatch => {
   const url = `${URL_BASIC + route}`
   try {
     if(route==='customers'){
@@ -207,14 +208,29 @@ export const CreateCall = (route, token, data) => async dispatch => {
       dispatch(orderItems.orderItemsPending());
     } else if (route==='shippingAddress'){
       dispatch(shippingAddress.shippingAddressesPending());
-    }      
-
+    } 
+    const tokenHeader = authHeader(customer)
+    let deliverData = null;   
+    let headers = null;  
+    if(route !=='products') {
+      deliverData = JSON.stringify(data);
+      headers = {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token,
+        'x-access-token': tokenHeader['x-access-token']
+      }; 
+    } else {
+      deliverData = data
+      headers = {
+        'X-CSRF-Token': token,
+        'x-access-token': tokenHeader['x-access-token']
+      };
+    }
     const response = await fetch(`${url}/create`, {
       method: 'POST',
-      headers: {
-        'X-CSRF-Token': token,
-      },
-      body: data,
+      headers,
+      body: deliverData,
     });
     const newData = await response.json();
     if(route==='customers'){
@@ -254,7 +270,7 @@ export const CreateCall = (route, token, data) => async dispatch => {
   }
 };
 
-export const UpdateCall = (route, token, data, id) => async dispatch => {
+export const UpdateCall = (route, token, data, id, customer) => async dispatch => {
   const url = `${URL_BASIC + route}`
   try {
     if(route==='customers'){
@@ -272,13 +288,28 @@ export const UpdateCall = (route, token, data, id) => async dispatch => {
     } else if (route==='shippingAddress'){
       dispatch(shippingAddress.shippingAddressesPending());
     }          
-    
+    const tokenHeader = authHeader(customer)
+    let deliverData = null;   
+    let headers = null;  
+    if(route !=='products') {
+      deliverData = JSON.stringify(data);
+      headers = {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token,
+        'x-access-token': tokenHeader['x-access-token']
+      }; 
+    } else {
+      deliverData = data
+      headers = {
+        'X-CSRF-Token': token,
+        'x-access-token': tokenHeader['x-access-token']
+      };
+    }
     const response = await fetch(`${url}/${id}`, {
       method: 'PUT',
-      headers: {
-        'X-CSRF-Token': token,
-      },
-      body: data,
+      headers,
+      body: deliverData,
     });
     const newData = await response.json();
     if(route==='customers'){
