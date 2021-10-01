@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
@@ -29,7 +31,7 @@ class NavBar extends Component {
             </li>
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                <i className="fa fa-home" />
+                <i className="fas fa-clipboard-list" />
                 Categories
               </a>
             </li>
@@ -37,62 +39,65 @@ class NavBar extends Component {
           <ul className="navbar-nav ">
             <li className="nav-item">
               <a className="nav-link" href="#">
-                <i className="fa fa-bell">
+                <i className="fas fa-shopping-cart">
                   <span className="badge badge-info">11</span>
                 </i>
-                Test
+                Cart
               </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="fa fa-globe">
-                  <span className="badge badge-warning">11</span>
-                </i>
-                Test
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="fa fa-bell">
-                  <span className="badge badge-info">11</span>
-                </i>
-                Login
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="fa fa-bell">
-                  <span className="badge badge-info">11</span>
-                </i>
-                Signup
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i className="fa fa-envelope-o">
-                  <span className="badge badge-primary">11</span>
-                </i>
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <div className="dropdown-divider" />
-                <a className="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
+            </li> 
+            {!loggedIn && ( 
+              <>          
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    <i className="fas fa-sign-in-alt" />
+                    Login
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    <i className="fas fa-user-plus" />
+                    Signup
+                  </a>
+                </li>
+              </>
+            )}
+            {loggedIn && (
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className="fas fa-id-card">
+                    <span className="badge badge-primary">11</span>
+                  </i>
+                  {customer.customer.username}
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a className="dropdown-item" href="#">Profile</a>
+                  {customer.role === 'Role_Admin' && (
+                    <a className="dropdown-item" href="#">Admin Panel</a>
+                  )}
+                  <div className="dropdown-divider" />
+                  <a className="dropdown-item" href="#" onClick={this.handleLogoutClick}>Logout</a>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
-    )
-  }
-  
+    );
+  };  
 };
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  };
+NavBar.propTypes = {
+  auth: PropTypes.shape({
+    loggedIn: PropTypes.bool,
+    customer: PropTypes.object,
+  }).isRequired,
 };
+
+const mapStateToProps = state => ({
+  auth: {
+    loggedIn: state.auth.loggedIn,
+    customer: state.auth.customer,
+  },
+});
 
 export default connect(mapStateToProps, { logout })(withRouter(NavBar));
