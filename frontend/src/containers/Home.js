@@ -9,8 +9,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
+import Carousel from 'react-bootstrap/Carousel'
 import { AllCall } from '../helpers/apiCalls';
-import style from '../style/Home.module.css'
+import style from '../style/Home.module.css';
+import placeholder from '../assets/placeholder.png';
 
 class Home extends Component {
 
@@ -27,7 +29,44 @@ class Home extends Component {
   render(){
     return (
         <main>
-          <div className="container">
+          <Carousel fade>
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${style.carousel}`}
+                src={placeholder}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${style.carousel}`}
+                src={placeholder}
+                alt="Second slide"
+              />
+
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className={`d-block w-100 ${style.carousel}`}
+                src={placeholder}
+                alt="Third slide"
+              />
+
+              <Carousel.Caption>
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+          <div className="container">            
             <nav className="navbar navbar-expand-lg navbar-dark bg-success mt-3 mb-5">
               <span className="navbar-brand">Categories:</span>
               <button
