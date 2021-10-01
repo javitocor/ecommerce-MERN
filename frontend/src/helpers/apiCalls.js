@@ -51,7 +51,7 @@ export const AllCall = (route, customer) => async dispatch => {
   } catch (error) {
     dispatch(setMessage(error));
     if(route==='customers'){
-      dispatch(customers.customerssError(error));
+      dispatch(customers.customersError(error));
     } else if (route==='products') {
       dispatch(products.productsError(error));
     } else if (route==='orders'){
@@ -63,7 +63,7 @@ export const AllCall = (route, customer) => async dispatch => {
     } else if (route==='orderItems'){
       dispatch(orderItems.orderItemsError(error));
     } else if (route==='shippingAddress'){
-      dispatch(shippingAddress.ShippingAddressesError(error));
+      dispatch(shippingAddress.shippingAddressesError(error));
     }   
   }
 };
@@ -108,7 +108,7 @@ export const SingleCall = (route, id, customer) => async dispatch => {
   } catch (error) {
     dispatch(setMessage(error));
     if(route==='customers'){
-      dispatch(customers.customerssError(error));
+      dispatch(customers.customersError(error));
     } else if (route==='products') {
       dispatch(products.productsError(error));
     } else if (route==='orders'){
@@ -120,7 +120,7 @@ export const SingleCall = (route, id, customer) => async dispatch => {
     } else if (route==='orderItems'){
       dispatch(orderItems.orderItemsError(error));
     } else if (route==='shippingAddress'){
-      dispatch(shippingAddress.ShippingAddressesError(error));
+      dispatch(shippingAddress.shippingAddressesError(error));
     }   
   }
 };
@@ -174,7 +174,7 @@ export const DeleteCall = (route, token, id, customer) => async dispatch => {
   } catch (error) {
     dispatch(setMessage(error));
     if(route==='customers'){
-      dispatch(customers.customerssError(error));
+      dispatch(customers.customersError(error));
     } else if (route==='products') {
       dispatch(products.productsError(error));
     } else if (route==='orders'){
@@ -186,7 +186,7 @@ export const DeleteCall = (route, token, id, customer) => async dispatch => {
     } else if (route==='orderItems'){
       dispatch(orderItems.orderItemsError(error));
     } else if (route==='shippingAddress'){
-      dispatch(shippingAddress.ShippingAddressesError(error));
+      dispatch(shippingAddress.shippingAddressesError(error));
     }   
   }
 };
@@ -253,7 +253,7 @@ export const CreateCall = (route, token, data, customer) => async dispatch => {
   } catch (error) {
     dispatch(setMessage(error));
     if(route==='customers'){
-      dispatch(customers.customerssError(error));
+      dispatch(customers.customersError(error));
     } else if (route==='products') {
       dispatch(products.productsError(error));
     } else if (route==='orders'){
@@ -265,7 +265,7 @@ export const CreateCall = (route, token, data, customer) => async dispatch => {
     } else if (route==='orderItems'){
       dispatch(orderItems.orderItemsError(error));
     } else if (route==='shippingAddress'){
-      dispatch(shippingAddress.ShippingAddressesError(error));
+      dispatch(shippingAddress.shippingAddressesError(error));
     }   
   }
 };
@@ -333,7 +333,7 @@ export const UpdateCall = (route, token, data, id, customer) => async dispatch =
     dispatch(setMessage(error));
     console.log(error)
     if(route==='customers'){
-      dispatch(customers.customerssError(error));
+      dispatch(customers.customersError(error));
     } else if (route==='products') {
       dispatch(products.productsError(error));
     } else if (route==='orders'){
@@ -345,7 +345,7 @@ export const UpdateCall = (route, token, data, id, customer) => async dispatch =
     } else if (route==='orderItems'){
       dispatch(orderItems.orderItemsError(error));
     } else if (route==='shippingAddress'){
-      dispatch(shippingAddress.ShippingAddressesError(error));
+      dispatch(shippingAddress.shippingAddressesError(error));
     }   
   }
 };

@@ -1,0 +1,48 @@
+main {
+      height: 100%;
+    }
+
+    @media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100%;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100%;
+      }
+    }
+
+.carousel{
+  height:50%
+}
+.carousel .carousel-inner,.carousel .carousel-inner .active,.carousel .carousel-inner .carousel-item{
+  height:100%
+}
+
+@media (max-width:776px){.carousel{height:100%}}
+
+.pagefooter{
+  background-color:green;
+}
+
+.pagefooter a { 
+  color: white !important;
+}
+.view{
+  background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg'); 
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
+
+.card2 {
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}

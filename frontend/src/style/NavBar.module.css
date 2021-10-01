@@ -1,25 +1,23 @@
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-
-.navbaricontop .navbar-nav .nav-link > .fa {
+.icon{
   position: relative;
   width: 36px;
   font-size: 24px;
-}
-
-.navbaricontop .navbar-nav .nav-link > .fa > .badge {
-  font-size: 0.75rem;
-  position: absolute;
-  right: 0;
-  font-family: sans-serif;
-}
-
-.navbaricontop .navbar-nav .nav-link > .fa {
   top: 3px;
   line-height: 12px;
 }
 
-.navbaricontop .navbar-nav .nav-link > .fa > .badge {
+.icon > .badge {
+  font-size: 0.75rem;
+  position: absolute;
+  right: 0;
+  font-family: sans-serif;
   top: -10px;
+}
+
+.icon {
+}
+
+.icon > .badge {
 }
 
 @media (min-width: 576px) {
@@ -32,7 +30,7 @@
     padding-bottom: 0;
   }
 
-  .navbaricontop.navbar-expand-sm .navbar-nav .nav-link > .fa {
+  .icon {
     display: block;
     width: 48px;
     margin: 2px auto 4px auto;
@@ -40,7 +38,7 @@
     line-height: 24px;
   }
 
-  .navbaricontop.navbar-expand-sm .navbar-nav .nav-link > .fa > .badge {
+  .icon > .badge {
     top: -7px;
   }
 }
@@ -55,7 +53,7 @@
     padding-bottom: 0;
   }
 
-  .navbaricontop.navbar-expand-md .navbar-nav .nav-link > .fa {
+  .icon {
     display: block;
     width: 48px;
     margin: 2px auto 4px auto;
@@ -63,7 +61,7 @@
     line-height: 24px;
   }
 
-  .navbaricontop.navbar-expand-md .navbar-nav .nav-link > .fa > .badge {
+  .icon > .badge {
     top: -7px;
   }
 }
@@ -78,7 +76,7 @@
     padding-bottom: 0;
   }
 
-  .navbaricontop.navbar-expand-lg .navbar-nav .nav-link > .fa {
+  .icon {
     display: block;
     width: 48px;
     margin: 2px auto 4px auto;
@@ -86,7 +84,7 @@
     line-height: 24px;
   }
 
-  .navbaricontop.navbar-expand-lg .navbar-nav .nav-link > .fa > .badge {
+  .icon > .badge {
     top: -7px;
   }
 }
@@ -101,7 +99,7 @@
     padding-bottom: 0;
   }
 
-  .navbaricontop.navbar-expand-xl .navbar-nav .nav-link > .fa {
+  .icon {
     display: block;
     width: 48px;
     margin: 2px auto 4px auto;
@@ -109,7 +107,7 @@
     line-height: 24px;
   }
 
-  .navbaricontop.navbar-expand-xl .navbar-nav .nav-link > .fa > .badge {
+  .icon > .badge {
     top: -7px;
   }
 }

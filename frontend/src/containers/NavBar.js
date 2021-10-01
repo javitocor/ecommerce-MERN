@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
-import navbar from '../style/Navbar.module.css'
+import navbar from '../style/NavBar.module.css'
 
 class NavBar extends Component {
   handleLogoutClick = () => {
@@ -25,37 +27,47 @@ class NavBar extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                <i className="fa fa-home" />
+                <i className={`fa fa-home ${navbar.icon}`} />
                 Home
               </a>
             </li>
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                <i className="fas fa-clipboard-list" />
+                <i className={`fas fa-clipboard-list ${navbar.icon}`} />
                 Categories
               </a>
             </li>
           </ul>
           <ul className="navbar-nav ">
-            <li className="nav-item">
+            <li className="nav-item active">
               <a className="nav-link" href="#">
-                <i className="fas fa-shopping-cart">
-                  <span className="badge badge-info">11</span>
+                <i className={`fas fa-shopping-cart ${navbar.icon}`}>
+                  <span className="badge badge-warning">11</span>
                 </i>
                 Cart
               </a>
-            </li> 
+            </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="#">
+                <i className={`fab fa-twitter ${navbar.icon}`} />
+              </a>
+            </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="#">
+                <i className={`fab fa-facebook-square ${navbar.icon}`} />
+              </a>
+            </li>  
             {!loggedIn && ( 
               <>          
-                <li className="nav-item">
+                <li className="nav-item active">
                   <a className="nav-link" href="#">
-                    <i className="fas fa-sign-in-alt" />
+                    <i className={`fas fa-sign-in-alt ${navbar.icon}`} />
                     Login
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item active">
                   <a className="nav-link" href="#">
-                    <i className="fas fa-user-plus" />
+                    <i className={`fas fa-user-plus ${navbar.icon}`} />
                     Signup
                   </a>
                 </li>
@@ -64,7 +76,7 @@ class NavBar extends Component {
             {loggedIn && (
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i className="fas fa-id-card">
+                  <i className={`fas fa-id-card ${navbar.icon}`}>
                     <span className="badge badge-primary">11</span>
                   </i>
                   {customer.customer.username}
