@@ -121,3 +121,66 @@ export const SingleCall = (route, id) => async dispatch => {
     }   
   }
 };
+
+export const DeleteCall = (route, token, id) => async dispatch => {
+  const url = `${URL_BASIC + route}`
+  try {
+    if(route==='customers'){
+      dispatch(customers.customersPending());
+    } else if (route==='products') {
+      dispatch(products.productsPending());
+    } else if (route==='orders'){
+      dispatch(orders.ordersPending());
+    } else if (route==='role'){
+      dispatch(roles.rolesPending());
+    } else if (route==='category'){
+      dispatch(categories.categoriesPending());
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsPending());
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.shippingAddressesPending());
+    }        
+
+    const response = await fetch(`${url}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token,
+      },
+    });
+    const newData = await response.json();
+    if(route==='customers'){
+      dispatch(customers.deleteCustomer(id));
+    } else if (route==='products') {
+      dispatch(products.deleteProduct(id));
+    } else if (route==='orders'){
+      dispatch(orders.deleteOrder(id));
+    } else if (route==='role'){
+      dispatch(roles.deleteRole(id));
+    } else if (route==='category'){
+      dispatch(categories.deleteCategory(id));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.deleteOrderItem(id));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.deleteShippingAddress(id));
+    }         
+    return newData;
+  } catch (error) {
+    if(route==='customers'){
+      dispatch(customers.customerssError(error));
+    } else if (route==='products') {
+      dispatch(products.productsError(error));
+    } else if (route==='orders'){
+      dispatch(orders.ordersError(error));
+    } else if (route==='role'){
+      dispatch(roles.rolesError(error));
+    } else if (route==='category'){
+      dispatch(categories.categoriesError(error));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsError(error));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.ShippingAddressesError(error));
+    }   
+  }
+};
