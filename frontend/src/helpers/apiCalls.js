@@ -65,3 +65,59 @@ export const AllCall = (route) => async dispatch => {
     }   
   }
 };
+
+export const SingleCall = (route, id) => async dispatch => {
+  const Url = `${URL_BASIC + route}`;
+  try {
+    if(route==='customers'){
+      dispatch(customers.customersPending());
+    } else if (route==='products') {
+      dispatch(products.productsPending());
+    } else if (route==='orders'){
+      dispatch(orders.ordersPending());
+    } else if (route==='role'){
+      dispatch(roles.rolesPending());
+    } else if (route==='category'){
+      dispatch(categories.categoriesPending());
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsPending());
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.shippingAddressesPending());
+    }      
+
+    const response = await fetch(`${Url}/${id}`, { mode: 'cors' });
+    const data = await response.json();
+    if(route==='customers'){
+      dispatch(customers.getSingleCustomer(data));
+    } else if (route==='products') {
+      dispatch(products.getSingleProduct(data));
+    } else if (route==='orders'){
+      dispatch(orders.getSingleOrder(data));
+    } else if (route==='role'){
+      dispatch(roles.getSingleRole(data));
+    } else if (route==='category'){
+      dispatch(categories.getSingleCategory(data));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.getSingleOrderItem(data));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.getSingleShippingAddress(data));
+    }          
+    return data;
+  } catch (error) {
+    if(route==='customers'){
+      dispatch(customers.customerssError(error));
+    } else if (route==='products') {
+      dispatch(products.productsError(error));
+    } else if (route==='orders'){
+      dispatch(orders.ordersError(error));
+    } else if (route==='role'){
+      dispatch(roles.rolesError(error));
+    } else if (route==='category'){
+      dispatch(categories.categoriesError(error));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsError(error));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.ShippingAddressesError(error));
+    }   
+  }
+};
