@@ -49,6 +49,7 @@ export const AllCall = (route) => async dispatch => {
     }          
     return data;
   } catch (error) {
+    dispatch(setMessage(error));
     if(route==='customers'){
       dispatch(customers.customerssError(error));
     } else if (route==='products') {
@@ -105,6 +106,7 @@ export const SingleCall = (route, id) => async dispatch => {
     }          
     return data;
   } catch (error) {
+    dispatch(setMessage(error));
     if(route==='customers'){
       dispatch(customers.customerssError(error));
     } else if (route==='products') {
@@ -165,9 +167,11 @@ export const DeleteCall = (route, token, id) => async dispatch => {
       dispatch(orderItems.deleteOrderItem(id));
     } else if (route==='shippingAddress'){
       dispatch(shippingAddress.deleteShippingAddress(id));
-    }         
+    }  
+    dispatch(setMessage(newData.message));     
     return newData;
   } catch (error) {
+    dispatch(setMessage(error));
     if(route==='customers'){
       dispatch(customers.customerssError(error));
     } else if (route==='products') {
@@ -227,9 +231,76 @@ export const CreateCall = (route, token, data) => async dispatch => {
       dispatch(orderItems.createOrderItem(newData.OrderItem));
     } else if (route==='shippingAddress'){
       dispatch(shippingAddress.createShippingAddress(newData.shippingAddress));
-    }         
+    } 
+    dispatch(setMessage(newData.message));        
     return newData;
   } catch (error) {
+    dispatch(setMessage(error));
+    if(route==='customers'){
+      dispatch(customers.customerssError(error));
+    } else if (route==='products') {
+      dispatch(products.productsError(error));
+    } else if (route==='orders'){
+      dispatch(orders.ordersError(error));
+    } else if (route==='role'){
+      dispatch(roles.rolesError(error));
+    } else if (route==='category'){
+      dispatch(categories.categoriesError(error));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsError(error));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.ShippingAddressesError(error));
+    }   
+  }
+};
+
+export const UpdateCall = (route, token, data, id) => async dispatch => {
+  const url = `${URL_BASIC + route}`
+  try {
+    if(route==='customers'){
+      dispatch(customers.customersPending());
+    } else if (route==='products') {
+      dispatch(products.productsPending());
+    } else if (route==='orders'){
+      dispatch(orders.ordersPending());
+    } else if (route==='role'){
+      dispatch(roles.rolesPending());
+    } else if (route==='category'){
+      dispatch(categories.categoriesPending());
+    } else if (route==='orderItems'){
+      dispatch(orderItems.orderItemsPending());
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.shippingAddressesPending());
+    }          
+    
+    const response = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'X-CSRF-Token': token,
+      },
+      body: data,
+    });
+    const newData = await response.json();
+    if(route==='customers'){
+      dispatch(customers.updateCustomer(newData.customer, id));
+    } else if (route==='products') {
+      dispatch(products.updateProduct(newData.product, id));
+    } else if (route==='orders'){
+      dispatch(orders.updateOrder(newData.order, id));
+    } else if (route==='role'){
+      dispatch(roles.updateRole(newData.role, id));
+    } else if (route==='category'){
+      dispatch(categories.updateCategory(newData.category, id));
+    } else if (route==='orderItems'){
+      dispatch(orderItems.updateOrderItem(newData.OrderItem, id));
+    } else if (route==='shippingAddress'){
+      dispatch(shippingAddress.updateShippingAddress(newData.shippingAddress, id));
+    } 
+    dispatch(setMessage(newData.message));     
+    return newData;
+  } catch (error) {
+    dispatch(setMessage(error));
+    console.log(error)
     if(route==='customers'){
       dispatch(customers.customerssError(error));
     } else if (route==='products') {
