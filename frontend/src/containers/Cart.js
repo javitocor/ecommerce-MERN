@@ -14,6 +14,7 @@ import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
   const {cookies, getCart} = props;
+  const {cookie} = cookies;
   const [products, setProducts] = useState({});
   const [total, setTotal] = useState(0);
   const [order, setOrder] = useState({});
@@ -30,7 +31,7 @@ const Cart = (props) => {
         console.log(error)
       }           
     })();
-  }, [cookies]);
+  }, [cookie]);
 
   return (
     <div className="container">

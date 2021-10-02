@@ -16,6 +16,7 @@ class NavBar extends Component {
 
   render(){
     const { loggedIn, customer } = this.props.auth;
+    const {cookie} = this.props.coookie
     return (
       <nav className={`navbar ${navbar.navbaricontop} navbar-expand-lg navbar-dark bg-success`}>
         <a className="navbar-brand" href="#">Snooker eCommerce</a>
@@ -42,7 +43,7 @@ class NavBar extends Component {
             <li className="nav-item active">
               <a className="nav-link" href="#">
                 <i className={`fas fa-shopping-cart ${navbar.icon}`}>
-                  <span className="badge badge-warning">11</span>
+                  <span className="badge badge-warning">{Object.keys(cookie).length}</span>
                 </i>
                 Cart
               </a>
@@ -103,6 +104,9 @@ NavBar.propTypes = {
     loggedIn: PropTypes.bool,
     customer: PropTypes.object,
   }).isRequired,
+  cookies: PropTypes.shape({
+    cookie: PropTypes.object,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -110,6 +114,9 @@ const mapStateToProps = state => ({
     loggedIn: state.auth.loggedIn,
     customer: state.auth.customer,
   },
+  cookies: {
+    cookie: state.cookies.cookie
+  }  
 });
 
 export default connect(mapStateToProps, { logout })(withRouter(NavBar));
