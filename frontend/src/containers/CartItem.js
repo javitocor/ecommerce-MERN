@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {updateCookieData} from '../actions/cookies';
+import style from '../style/CartItem.module.css';
 
 class CartItem extends React.Component{
   constructor(props) {
@@ -41,7 +42,7 @@ class CartItem extends React.Component{
     const {product} = this.props;
     return (
       <tr>
-        <td><img src="https://via.placeholder.com/400x200/FFB6C1/000000" className="img-cart" /></td>
+        <td><img src={product.product.image} className={style.imgcart} /></td>
         <td>
           <strong>{product.name}</strong>
         </td>
@@ -56,7 +57,10 @@ class CartItem extends React.Component{
           $
           {product.price}
         </td>
-        <td>$54.00</td>
+        <td>
+          $
+          {product.get_total}
+        </td>
       </tr>
     )
   }

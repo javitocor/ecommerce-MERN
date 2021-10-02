@@ -9,21 +9,28 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {getCookieData} from '../actions/cookies';
 import CartItem from './CartItem';
+import cartData from '../helpers/cartData';
 import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
   const {cookies, getCart} = props;
   const [products, setProducts] = useState({});
+  const [total, setTotal] = useState(0);
+  const [order, setOrder] = useState({});
 
   useEffect(() => {
     (async () => {
       try {
         const cart = await getCart('cart');
+        const data =await cartData(cart);
+        setProducts(data.items);
+        setTotal(data.cartItems);
+        setOrder(data.order);
       } catch (error) {
         console.log(error)
       }           
     })();
-  }, []);
+  }, [cookies]);
 
   return (
     <div className="container">
@@ -38,7 +45,7 @@ const Cart = (props) => {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <div className="panel panel-info panel-shadow">
+            <div className={`panel panel-info ${style.panelshadow}`}>
               <div className="panel-heading">
                 <h3>
                   <img className="img-circle img-thumbnail" src="https://bootdey.com/img/Content/user_3.jpg" />
@@ -66,15 +73,21 @@ const Cart = (props) => {
                       </tr>
                       <tr>
                         <td colSpan="4" className="text-right">Total Product</td>
-                        <td>$86.00</td>
+                        <td>
+                          $
+                          {order.get_cart_total}
+                        </td>
                       </tr>
                       <tr>
-                        <td colSpan="4" className="text-right">Total Shipping</td>
-                        <td>$2.00</td>
+                        <td colSpan="4" className="text-right">Total Items</td>
+                        <td>{total}</td>
                       </tr>
                       <tr>
                         <td colSpan="4" className="text-right"><strong>Total</strong></td>
-                        <td>$88.00</td>
+                        <td>
+                          $
+                          {order.get_cart_total}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -86,7 +99,7 @@ const Cart = (props) => {
                 &nbsp;Continue Shopping
             </a>
             <a href="#" className="btn btn-primary pull-right">
-              Next
+              Checkout
               <span className="glyphicon glyphicon-chevron-right" />
             </a>
           </div>
