@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { login } from "../actions/auth";
+import { customerLogin } from "../AuthenticationServices/authService";
 
 const required = (value) => {
   if (!value) {
@@ -48,7 +48,7 @@ class Login extends Component {
     });
   }
 
-  handleLogin(e) {
+  async handleLogin(e) {
     e.preventDefault();
 
     this.setState({
@@ -57,19 +57,23 @@ class Login extends Component {
 
     this.form.validateAll();
 
-    const { dispatch, history } = this.props;
+    const { history, loginCustomer, location } = this.props;
+    const { state } = location;
+    const redirectUrl = state ? state.from.pathname : "/login";
 
     if (this.checkBtn.context._errors.length === 0) {
-      dispatch(login(this.state.email, this.state.password))
-        .then(() => {
-          history.push("/home");
-          window.location.reload();
-        })
-        .catch(() => {
-          this.setState({
-            loading: false
-          });
+      const customer = await loginCustomer(this.state.email, this.state.password);
+      if(customer.role){
+        history.push({pathname:redirectUrl});
+        this.setState({
+          loading: false
         });
+      } else {
+        this.setState({
+          loading: false,
+        });
+      }
+      
     } else {
       this.setState({
         loading: false,
@@ -158,7 +162,7 @@ class Login extends Component {
 Login.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
-  login: PropTypes.func.isRequired,
+  loginCustomer: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -171,7 +175,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  login,
+  loginCustomer: customerLogin,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
