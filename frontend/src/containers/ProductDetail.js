@@ -12,149 +12,159 @@ import Spinner from 'react-bootstrap/Spinner';
 import { SingleCall } from '../helpers/apiCalls';
 import style from '../style/ProductDetail.module.css';
 import placeholder from '../assets/placeholder.png';
+import {updateCookieData} from '../actions/cookies';
 
 class ProductDetail extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      numberItems: 1,
+    };
+  }
 
   async componentDidMount() {
-    const { getSingle, auth, location } = this.props;
+    const { getSingle, location } = this.props;
     const { id } = location.state;
-    const { customer } = auth;
     try {
-      await getSingle('products', id, customer.customer);
+      await getSingle('products', id);
     } catch (error) {
       console.log(error)
     }        
   }
 
+  handleChange = (e) => {
+    this.setState({
+      numberItems: e.target.value,
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const {updateCookie, products} = this.props;
+    const {product} = products;
+    updateCookie('cart', product.id, this.state.numberItems);
+  }
+
   render(){
+    const {products} = this.props;
+    const {product} = products;
     return (
       <main className="mt-5 pt-4">
-    <div className="container dark-grey-text mt-5">
-      <div className="row wow fadeIn">
-        <div className="col-md-6 mb-4">
+        <div className="container dark-grey-text mt-5">
+          <div className="row wow fadeIn">
+            <div className="col-md-6 mb-4">
 
-          <img src={placeholder} className="img-fluid" alt="" />
+              <img src={placeholder} className="img-fluid" alt="" />
 
-        </div>
-        <div className="col-md-6 mb-4">
-          <div className="p-4">
+            </div>
+            <div className="col-md-6 mb-4">
+              <div className="p-4">
 
-            <div className="mb-3">
-              <a href="">
-                <span className="badge purple mr-1">Category 2</span>
-              </a>
-              <a href="">
-                <span className="badge blue mr-1">New</span>
-              </a>
-              <a href="">
-                <span className="badge red mr-1">Bestseller</span>
-              </a>
+                <div className="mb-3">
+                  {product.category.map(cat=>(
+                    <a href="">
+                      <span className="badge badge-info mr-1">{cat.name}</span>
+                    </a>
+                  ))}
+                </div>
+
+                <p className="lead">
+                  <span className="mr-1">
+                    <del>$200</del>
+                  </span>
+                  <span>
+                    $
+                    {product.price}
+                  </span>
+                </p>
+
+                <p className="lead font-weight-bold">Description</p>
+
+                <p>
+                  {product.description}
+
+                </p>
+
+                <form className="d-flex justify-content-left">
+                  <input type="number" value={this.state.numberItems} aria-label="Search" className="form-control" style={{width: "100px"}} onChange={this.handleChange} />
+                  <button className="btn btn-primary btn-md my-0 p" type="submit" onClick={this.handleSubmit}>
+                    Add to cart
+                    <i className="fas fa-shopping-cart ml-1" />
+                  </button>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div className="row d-flex justify-content-center wow fadeIn">
+            <div className="col-md-6 text-center">
+
+              <h4 className="my-4 h4">Additional information</h4>
+
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+                voluptates,
+                quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.
+
+              </p>
+
             </div>
 
-            <p className="lead">
-              <span className="mr-1">
-                <del>$200</del>
-              </span>
-              <span>$100</span>
-            </p>
+          </div>
+          <div className="row wow fadeIn">
+            <div className="col-lg-4 col-md-12 mb-4">
 
-            <p className="lead font-weight-bold">Description</p>
+              <img src={placeholder} className="img-fluid" alt="" />
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.
+            </div>
+            <div className="col-lg-4 col-md-6 mb-4">
 
-            </p>
+              <img src={placeholder} className="img-fluid" alt="" />
 
-            <form className="d-flex justify-content-left">
-              <input type="number" value="1" aria-label="Search" className="form-control" style={{width: "100px"}} />
-              <button className="btn btn-primary btn-md my-0 p" type="submit">
-                Add to cart
-                <i className="fas fa-shopping-cart ml-1" />
-              </button>
+            </div>
+            <div className="col-lg-4 col-md-6 mb-4">
 
-            </form>
+              <img src={placeholder} className="img-fluid" alt="" />
+
+            </div>
 
           </div>
-        </div>
-      </div>
-      <hr />
-      <div className="row d-flex justify-content-center wow fadeIn">
-        <div className="col-md-6 text-center">
-
-          <h4 className="my-4 h4">Additional information</h4>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
-            voluptates,
-            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.
-
-          </p>
 
         </div>
+        <footer className={`${style.pagefooter} text-center font-small mt-4 wow fadeIn`}>
+          <hr className="my-4" />
+          <div className="pb-4">
+            <a href="#" target="_blank">
+              <i className="fab fa-facebook-f mr-3" />
+            </a>
 
-      </div>
-      <div className="row wow fadeIn">
-        <div className="col-lg-4 col-md-12 mb-4">
+            <a href="#" target="_blank">
+              <i className="fab fa-twitter mr-3" />
+            </a>
 
-          <img src={placeholder} className="img-fluid" alt="" />
+            <a href="#" target="_blank">
+              <i className="fab fa-youtube mr-3" />
+            </a>
 
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4">
+            <a href="#" target="_blank">
+              <i className="fab fa-pinterest mr-3" />
+            </a>
 
-          <img src={placeholder} className="img-fluid" alt="" />
+            <a href="#" target="_blank">
+              <i className="fab fa-github mr-3" />
+            </a>
 
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4">
+            <a href="#" target="_blank">
+              <i className="fab fa-codepen mr-3" />
+            </a>
+          </div>
+            <div className="footer-copyright py-3">
+              © 2021 Copyright: JaviCorp      
+            </div>
 
-          <img src={placeholder} className="img-fluid" alt="" />
-
-        </div>
-
-      </div>
-
-    </div>
-    <footer className={`${style.pagefooter} text-center font-small mt-4 wow fadeIn`}>
-    <hr className="my-4" />
-    <div className="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-        <i className="fab fa-facebook-f mr-3" />
-      </a>
-
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i className="fab fa-twitter mr-3" />
-      </a>
-
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i className="fab fa-youtube mr-3" />
-      </a>
-
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i className="fab fa-google-plus-g mr-3" />
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i className="fab fa-dribbble mr-3" />
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i className="fab fa-pinterest mr-3" />
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i className="fab fa-github mr-3" />
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i className="fab fa-codepen mr-3" />
-      </a>
-    </div>
-    <div className="footer-copyright py-3">
-      © 2018 Copyright: JaviCorp      
-    </div>
-
-    </footer>
+        </footer>
       </main>
   
     );
@@ -166,12 +176,9 @@ ProductDetail.propTypes = {
     error: PropTypes.object,
     pending: PropTypes.bool,
     product: PropTypes.object,
-  }).isRequired,
-  auth: PropTypes.shape({
-    loggedIn: PropTypes.bool,
-    customer: PropTypes.object,
-  }).isRequired,
+  }).isRequired,  
   getSingle: PropTypes.func.isRequired,
+  updateCookie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -179,15 +186,12 @@ const mapStateToProps = state => ({
     error: state.products.error,
     product: state.products.product,
     pending: state.products.pending,
-  },
-  auth: {
-    loggedIn: state.auth.loggedIn,
-    customer: state.auth.customer,
-  },
+  },  
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getProduct: SingleCall,
+  updateCookie: updateCookieData
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

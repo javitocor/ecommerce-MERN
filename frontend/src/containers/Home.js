@@ -29,6 +29,7 @@ class Home extends Component {
   }
 
   render(){
+    const {productsList} = this.props;
     return (
         <main>
           <Carousel fade>

@@ -18,8 +18,8 @@ export const deleteCookieData = (name) => {
   };
 };
 
-export const updateCookieData = (name, value) => {
-  const cookie = bakeCookie(name, value);
+export const updateCookieData = (name, productId, quantity) => {
+  const cookie = bakeCookie(name, productId, quantity);
   return {
     type: UPDATE_COOKIE,
     cookie

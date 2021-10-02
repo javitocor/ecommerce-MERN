@@ -14,7 +14,7 @@ exports.product_list = async (req, res, next) => {
 
 exports.product_detail = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id).select("-__v");
+    const product = await Product.findById(req.params.id).select("-__v").populate('category');
     res.json(product);
   } catch (error) {
     res.json(error)
