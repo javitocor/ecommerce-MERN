@@ -8,6 +8,7 @@ import categoryReducer from './categories';
 import orderReducer from './orders';
 import orderItemReducer from './orderItems';
 import shippingAddressReducer from './shippingAddress';
+import cookieReducer from './cookies';
 
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   orders: orderReducer,
   orderItems: orderItemReducer,
   shippingAddress: shippingAddressReducer,
+  cookies: cookieReducer,
 });
 
 export default rootReducer;
