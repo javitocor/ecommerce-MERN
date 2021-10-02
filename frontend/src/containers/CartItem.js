@@ -44,7 +44,7 @@ class CartItem extends React.Component{
       <tr>
         <td><img src={product.product.image} className={style.imgcart} /></td>
         <td>
-          <strong>{product.name}</strong>
+          <strong>{product.product.name}</strong>
         </td>
         <td>
           <form className="form-inline">

@@ -7,11 +7,6 @@
 
 import getProducts from './getProducts';
 
-const a = {
-  'productId': {'quantity': 3},
-  'productId2': {'quantity': 3},
-  'productId3': {'quantity': 3},
-}
 
 async function cartData(cart) {
   const items = [];
@@ -21,9 +16,9 @@ async function cartData(cart) {
   for (const productId in cart) {
     const product = await getProducts(productId);
     cartItems += cart[productId].quantity;
-    total = (product.price * cart[productId].quantity);
-    order.get_cart_total += total
-		order.get_cart_items += cart[i].quantity
+    const total = (product.price * cart[productId].quantity);
+    order.get_cart_total += total;
+		order.get_cart_items += cart[productId].quantity;
     const item = {
       'id':product._id,
       'product':{

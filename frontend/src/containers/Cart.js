@@ -22,7 +22,7 @@ const Cart = (props) => {
     (async () => {
       try {
         const cart = await getCart('cart');
-        const data =await cartData(cart);
+        const data = await cartData(cart);
         setProducts(data.items);
         setTotal(data.cartItems);
         setOrder(data.order);
