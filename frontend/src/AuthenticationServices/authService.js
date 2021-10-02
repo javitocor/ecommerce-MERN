@@ -60,7 +60,7 @@ export const customerLogin = (email, password) => async (dispatch) => {
   }
 };
 
-export const customerLogout = (customer) => (dispatch) => {
-  removeLocalStorage(customer);
+export const customerLogout = () => (dispatch) => {
+  removeLocalStorage();
   dispatch(logout());  
 };
