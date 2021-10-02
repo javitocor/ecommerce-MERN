@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { customerSignup } from "../AuthenticationServices/authService";
+import style from '../style/Signup.module.css';
 
 const required = (value) => {
   if (!value) {
@@ -119,11 +120,11 @@ class Signup extends Component {
 
     return (
       <div className="col-md-12">
-        <div className="card card-container">
+        <div className={`card ${style.cardcontainer} ${style.card2}`}>
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
-            className="profile-img-card"
+            className={style.profileimgcard}
           />
 
           <Form
