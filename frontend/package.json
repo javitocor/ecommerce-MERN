@@ -18,9 +18,11 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-validation": "^3.0.7",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.9",
+    "validator": "^13.6.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
