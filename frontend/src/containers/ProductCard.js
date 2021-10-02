@@ -2,10 +2,18 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {updateCookieData} from '../actions/cookies';
 import style from '../style/ProductCard.module.css';
 
 const ProductCard = props => {
-  const {product} = props;
+  const {product, updateCookie} = props;
+
+  function handleSubmit(e){
+    e.preventDefault();
+    updateCookie('cart', product.id, 1);
+  }
 
   return (
     <div className="col-md-4 mt-2">
@@ -44,7 +52,7 @@ const ProductCard = props => {
           </div>
           <div className="text-muted mb-3">34 reviews</div> 
           {' '}
-          <button type="button" className={`btn ${style.bgcart}`}>
+          <button type="button" className={`btn ${style.bgcart}`} onClick={handleSubmit}>
             <i className="fa fa-cart-plus mr-2" />
             {' '}
             Add to cart
@@ -57,6 +65,11 @@ const ProductCard = props => {
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
+  updateCookie: PropTypes.func.isRequired,
 };
 
-export default ProductCard;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  updateCookie: updateCookieData
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(ProductCard);

@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import Carousel from 'react-bootstrap/Carousel'
-import ProductCard from '../components/ProductCard';
+import ProductCard from './ProductCard';
 import { AllCall } from '../helpers/apiCalls';
 import style from '../style/Home.module.css';
 import placeholder from '../assets/placeholder.png';
