@@ -42,7 +42,7 @@ class ProductDetail extends Component {
     e.preventDefault();
     const {updateCookie, products} = this.props;
     const {product} = products;
-    updateCookie('cart', product.id, this.state.numberItems);
+    updateCookie('cart', product._id, this.state.numberItems);
   }
 
   render(){
