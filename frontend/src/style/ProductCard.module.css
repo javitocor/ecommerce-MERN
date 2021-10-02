@@ -1,0 +1,55 @@
+.card2 {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .1875rem
+}
+
+.cardimgactions {
+  position: relative
+}
+
+.cardbody {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  text-align: center
+}
+
+.cardimg {
+  width: 350px
+}
+
+.star {
+  color: red
+}
+
+.bgcart {
+  background-color: orange;
+  color: #fff
+}
+
+.bgcart:hover {
+  color: #fff
+}
+
+.bgbuy {
+  background-color: green;
+  color: #fff;
+  padding-right: 29px
+}
+
+.bgbuy:hover {
+  color: #fff
+}
+
+a {
+  text-decoration: none !important
+}
