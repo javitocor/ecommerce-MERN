@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import {getCookieData} from '../actions/cookies';
 import CartItem from './CartItem';
 import cartData from '../helpers/cartData';
@@ -99,10 +100,32 @@ const Cart = (props) => {
               <span className="glyphicon glyphicon-arrow-left" />
                 &nbsp;Continue Shopping
             </a>
+            <Link
+              to='/home'
+              className="btn btn-success"
+              id="list-home-list"
+              data-toggle="list"
+              role="tab"
+              aria-controls="home"
+            >
+              <span className="glyphicon glyphicon-arrow-left" />
+                &nbsp;Continue Shopping
+            </Link>
             <a href="#" className="btn btn-primary pull-right">
               Checkout
               <span className="glyphicon glyphicon-chevron-right" />
             </a>
+            <Link
+              to='/checkout'
+              className="btn btn-primary pull-right"
+              id="list-home-list"
+              data-toggle="list"
+              role="tab"
+              aria-controls="home"
+            >
+              Checkout
+              <span className="glyphicon glyphicon-chevron-right" />
+            </Link>
           </div>
         </div>
       </div>
