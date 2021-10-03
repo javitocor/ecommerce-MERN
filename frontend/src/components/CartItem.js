@@ -48,7 +48,7 @@ class CartItem extends React.Component{
             to={{
               pathname: `/product/${product.product.name}`,
               state: {
-                id: product.product._id,
+                id: product._id,
               },
             }}
           >
@@ -57,7 +57,7 @@ class CartItem extends React.Component{
         </td>
         <td>
           <form className="form-inline">
-            <input className="form-control" type="number" name={product._id} value={this.state.quantity} onChange={this.handleChange} />
+            <input className="form-control w-50" type="number" name={product._id} value={this.state.quantity} onChange={this.handleChange} />
             <div className="btn btn-primary mr-2 ml-2" onClick={this.handleSubmit}><i className="far fa-edit" /></div>
             <div className="btn btn-danger" onClick={this.handleDelete}><i className="fas fa-trash-alt" /></div>
           </form>

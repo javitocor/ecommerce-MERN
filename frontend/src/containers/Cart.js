@@ -48,33 +48,50 @@ const Cart = (props) => {
   }
   
   return (
-    <div className="container">
-      <div className="col-md-9 col-sm-8 content">
-        <div className="row">
+    <div className="container d-flex justify-content-center align-items-center">
+      <div className="col-md-9 col-sm-8 mt-5 d-flex flex-column align-items-center justify-content-end w-100">
+        <div className="row w-100">
           <div className="col-md-12">
             <ol className="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li className="active">Cart</li>
+              <li>
+                <Link
+                  to='/'
+                  className=""
+                  id="list-home-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="home"
+                >
+                  Home
+                  {' '}
+                </Link>
+              </li>
+              <li className="active">
+                /
+                {' '}
+                {' '}
+                Cart
+              </li>
             </ol>
           </div>
         </div>
-        <div className="row">
+        <div className="row w-100">
           <div className="col-md-12">
-            <div className={`panel panel-info ${style.panelshadow}`}>
-              <div className="panel-heading">
+            <div className={`card ${style.panelshadow}`}>
+              <div className="card-header">
                 <h3>
-                  <img className="img-circle img-thumbnail" src="https://bootdey.com/img/Content/user_3.jpg" />
-                  Matew darfkmoun
+                  <img className="rounded img-thumbnail mr-4" src="https://bootdey.com/img/Content/user_3.jpg" />
+                  {props.auth.customer.username ? props.auth.customer.username : 'Anonymous Customer'}
                 </h3>
               </div>
-              <div className="panel-body"> 
-                <div className="table-responsive">
+              <div className="card-body"> 
+                <div className="table">
                   <table className="table">
                     <thead>
                       <tr>
                         <th>Product</th>
                         <th>Description</th>
-                        <th>Qty</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                         <th>Total</th>
                       </tr>
@@ -94,6 +111,13 @@ const Cart = (props) => {
                         </td>
                       </tr>
                       <tr>
+                        <td colSpan="4" className="text-right">Total Shipping</td>
+                        <td>
+                          $
+                          0.00
+                        </td>
+                      </tr>
+                      <tr>
                         <td colSpan="4" className="text-right">Total Items</td>
                         <td>{total}</td>
                       </tr>
@@ -109,28 +133,30 @@ const Cart = (props) => {
                 </div>
               </div>
             </div>
-            <Link
-              to='/'
-              className="btn btn-success"
-              id="list-home-list"
-              data-toggle="list"
-              role="tab"
-              aria-controls="home"
-            >
-              <span className="glyphicon glyphicon-arrow-left" />
-                &nbsp;Continue Shopping
-            </Link>
-            <Link
-              to='/checkout'
-              className="btn btn-primary pull-right"
-              id="list-home-list"
-              data-toggle="list"
-              role="tab"
-              aria-controls="home"
-            >
-              Checkout
-              <span className="glyphicon glyphicon-chevron-right" />
-            </Link>
+            <div className="w-100 mt-3 d-flex flex-row aliggn-items-center justify-content-between mb-3">
+              <Link
+                to='/'
+                className="btn btn-success"
+                id="list-home-list"
+                data-toggle="list"
+                role="tab"
+                aria-controls="home"
+              >
+                <span className="glyphicon glyphicon-arrow-left" />
+                Continue Shopping
+              </Link>
+              <Link
+                to='/checkout'
+                className="btn btn-primary pull-right"
+                id="list-home-list"
+                data-toggle="list"
+                role="tab"
+                aria-controls="home"
+              >
+                Checkout
+                <span className="glyphicon glyphicon-chevron-right" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -143,6 +169,9 @@ Cart.propTypes = {
   cookies: PropTypes.shape({
     cookie: PropTypes.object,
   }).isRequired,  
+  auth: PropTypes.shape({
+    customer: PropTypes.object,
+  }).isRequired,  
   getCart: PropTypes.func.isRequired,
   updateCart: PropTypes.func.isRequired,
 };
@@ -150,7 +179,10 @@ Cart.propTypes = {
 const mapStateToProps = state => ({
   cookies: {
     cookie: state.cookies.cookie,
-  },  
+  },
+  auth: {
+    customer: state.auth.customer
+  }  
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

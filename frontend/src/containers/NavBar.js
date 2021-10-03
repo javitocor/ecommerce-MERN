@@ -55,7 +55,7 @@ class NavBar extends Component {
             </li>
           </ul>
           <ul className="navbar-nav ">
-            <li className="nav-item active">
+            <li className="nav-item active d-flex justify-content-center align-items-center">
               <Link
                 to='/cart'
                 className="nav-link"
@@ -64,21 +64,11 @@ class NavBar extends Component {
                 role="tab"
                 aria-controls="cart"
               >
-                <span className="badge badge-warning">{cookie ? Object.keys(cookie).length : 0}</span>
+                <span className="badge badge-warning position-relative">{cookie ? Object.keys(cookie).length : 0}</span>
                 <i className={`fas fa-shopping-cart ${navbar.icon}`} />
                 Cart
               </Link>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                <i className={`fab fa-twitter ${navbar.icon}`} />
-              </a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                <i className={`fab fa-facebook-square ${navbar.icon}`} />
-              </a>
-            </li>  
+            </li> 
             {!loggedIn && ( 
               <>          
                 <li className="nav-item active">
@@ -110,11 +100,9 @@ class NavBar extends Component {
               </>
             )}
             {loggedIn && (
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i className={`fas fa-id-card ${navbar.icon}`}>
-                    <span className="badge badge-primary">11</span>
-                  </i>
+              <li className="nav-item d-flex justify-content-center align-items-center">
+                <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className={`fas fa-id-card ${navbar.icon}`} />
                   {customer.customer.username}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
