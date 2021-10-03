@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import {updateCookieData} from '../actions/cookies';
 import style from '../style/ProductCard.module.css';
 
@@ -16,50 +17,65 @@ const ProductCard = props => {
   }
 
   return (
-    <div className="col-md-4 mt-2">
-      <div className={`${style.card2} card`}>
-        <div className={`card-body ${style.cardbody}`}>
-          <div className={style.cardimageactions}> 
-            {' '}
-            <img src={product.image} className={`card-img img-fluid ${style.cardimg}`} width="96" height="350" alt="" />
-            {' '}
-          </div>
-        </div>
-        <div className={`card-body bg-light text-center ${style.cardbody}`}>
-          <div className="mb-2">
-            <h6 className="font-weight-semibold mb-2"> 
+    <Link 
+      className=""
+      id="list-home-list"
+      data-toggle="list"
+      role="tab"
+      aria-controls="home"
+      to={{
+              pathname: `/project/${product.name}`,
+              state: {
+                id: product._id,
+              },
+            }}
+    >
+      <div className="col-md-4 mt-2">
+        <div className={`${style.card2} card`}>
+          <div className={`card-body ${style.cardbody}`}>
+            <div className={style.cardimageactions}> 
               {' '}
-              <a href="#" className="text-default mb-2" data-abc="true">{product.name}</a>
+              <img src={product.image} className={`card-img img-fluid ${style.cardimg}`} width="96" height="350" alt="" />
               {' '}
-            </h6> 
-            {' '}
-            <a href="#" className="text-muted" data-abc="true">Laptops & Notebooks</a>
+            </div>
           </div>
-          <h3 className="mb-0 font-weight-semibold">
-            $
-            {product.price}
-          </h3>
-          <div> 
+          <div className={`card-body bg-light text-center ${style.cardbody}`}>
+            <div className="mb-2">
+              <h6 className="font-weight-semibold mb-2"> 
+                {' '}
+                <a href="#" className="text-default mb-2" data-abc="true">{product.name}</a>
+                {' '}
+              </h6> 
+              {' '}
+              <a href="#" className="text-muted" data-abc="true">Laptops & Notebooks</a>
+            </div>
+            <h3 className="mb-0 font-weight-semibold">
+              $
+              {product.price}
+            </h3>
+            <div> 
+              {' '}
+              <i className={`fa fa-star ${style.star}`} /> 
+              {' '}
+              <i className={`fa fa-star ${style.star}`} /> 
+              {' '}
+              <i className={`fa fa-star ${style.star}`} /> 
+              {' '}
+              <i className={`fa fa-star ${style.star}`} />
+              {' '}
+            </div>
+            <div className="text-muted mb-3">34 reviews</div> 
             {' '}
-            <i className={`fa fa-star ${style.star}`} /> 
-            {' '}
-            <i className={`fa fa-star ${style.star}`} /> 
-            {' '}
-            <i className={`fa fa-star ${style.star}`} /> 
-            {' '}
-            <i className={`fa fa-star ${style.star}`} />
-            {' '}
+            <button type="button" className={`btn ${style.bgcart}`} onClick={handleSubmit}>
+              <i className="fa fa-cart-plus mr-2" />
+              {' '}
+              Add to cart
+            </button>
           </div>
-          <div className="text-muted mb-3">34 reviews</div> 
-          {' '}
-          <button type="button" className={`btn ${style.bgcart}`} onClick={handleSubmit}>
-            <i className="fa fa-cart-plus mr-2" />
-            {' '}
-            Add to cart
-          </button>
         </div>
       </div>
-    </div>
+    </Link>
+    
   );
 };
 
