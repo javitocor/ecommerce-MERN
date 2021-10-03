@@ -20,7 +20,7 @@ async function cartData(cart) {
     order.get_cart_total += total;
 		order.get_cart_items += cart[productId].quantity;
     const item = {
-      'id':product._id,
+      '_id':product._id,
       'product':{
         'name':product.name, 
         'price':product.price, 

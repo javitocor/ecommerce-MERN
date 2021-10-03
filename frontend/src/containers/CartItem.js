@@ -10,6 +10,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import {updateCookieData} from '../actions/cookies';
 import style from '../style/CartItem.module.css';
 
@@ -44,7 +45,21 @@ class CartItem extends React.Component{
       <tr>
         <td><img src={product.product.image} className={style.imgcart} /></td>
         <td>
-          <strong>{product.product.name}</strong>
+          <Link 
+            className=""
+            id="list-home-list"
+            data-toggle="list"
+            role="tab"
+            aria-controls="home"
+            to={{
+              pathname: `/project/${product.product.name}`,
+              state: {
+                id: product.product._id,
+              },
+            }}
+          >
+            {product.product.name}
+          </Link>
         </td>
         <td>
           <form className="form-inline">
