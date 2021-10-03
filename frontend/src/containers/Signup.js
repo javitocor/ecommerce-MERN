@@ -7,7 +7,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -174,6 +174,20 @@ class Signup extends Component {
                 <div className="form-group">
                   <button className="btn btn-primary btn-block">Sign Up</button>
                 </div>
+                <p className='mt-3'>
+                  Already have account 
+                  {' '}
+                  <Link
+                    name="login"
+                    to="/login"
+                    id="list-home-list"
+                    data-toggle="list"
+                    role="tab"
+                    aria-controls="home"
+                  >
+                    Log in
+                  </Link> 
+                </p>
               </div>
             )}
 

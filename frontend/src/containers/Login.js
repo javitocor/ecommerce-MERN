@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 import React, { Component } from "react";
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -138,6 +138,21 @@ class Login extends Component {
                 )}
                 <span>Login</span>
               </button>
+              <p className='mt-3'>
+                Need an account 
+                {' '}
+                <Link
+                  name="signup"
+                  to="/signup"
+                  id="list-home-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="home"
+                >
+                  Sign up
+                </Link>
+              </p>
+              <p className="mt-5 mb-3 text-muted">JaviCorp © 2021</p>
             </div>
 
             {message && (
