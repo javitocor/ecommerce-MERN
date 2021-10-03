@@ -27,10 +27,17 @@ class NavBar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <Link
+                to='/home'
+                className="nav-link"
+                id="list-home-list"
+                data-toggle="list"
+                role="tab"
+                aria-controls="home"
+              >
                 <i className={`fa fa-home ${navbar.icon}`} />
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item active">
               <a className="nav-link" href="#">
@@ -41,12 +48,19 @@ class NavBar extends Component {
           </ul>
           <ul className="navbar-nav ">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <Link
+                to='/cart'
+                className="nav-link"
+                id="list-cart-list"
+                data-toggle="list"
+                role="tab"
+                aria-controls="cart"
+              >
                 <i className={`fas fa-shopping-cart ${navbar.icon}`}>
                   <span className="badge badge-warning">{Object.keys(cookie).length}</span>
                 </i>
                 Cart
-              </a>
+              </Link>
             </li>
             <li className="nav-item active">
               <a className="nav-link" href="#">
@@ -61,16 +75,30 @@ class NavBar extends Component {
             {!loggedIn && ( 
               <>          
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">
+                  <Link
+                    to='/login'
+                    className="nav-link"
+                    id="list-login-list"
+                    data-toggle="list"
+                    role="tab"
+                    aria-controls="login"
+                  >
                     <i className={`fas fa-sign-in-alt ${navbar.icon}`} />
                     Login
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">
+                  <Link
+                    to='/signup'
+                    className="nav-link"
+                    id="list-signup-list"
+                    data-toggle="list"
+                    role="tab"
+                    aria-controls="signup"
+                  >
                     <i className={`fas fa-user-plus ${navbar.icon}`} />
                     Signup
-                  </a>
+                  </Link>
                 </li>
               </>
             )}
@@ -83,12 +111,40 @@ class NavBar extends Component {
                   {customer.customer.username}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">Profile</a>
+                  <Link
+                    to='/profile'
+                    className="dropdown-item"
+                    id="list-profile-list"
+                    data-toggle="list"
+                    role="tab"
+                    aria-controls="profile"
+                  >
+                    Profile
+                  </Link>
                   {customer.role === 'Role_Admin' && (
-                    <a className="dropdown-item" href="#">Admin Panel</a>
+                    <Link
+                      to='/profile'
+                      className="nav-link"
+                      id="list-profile-list"
+                      data-toggle="list"
+                      role="tab"
+                      aria-controls="profile"
+                    >
+                      Admin Panel
+                    </Link>
                   )}
                   <div className="dropdown-divider" />
                   <a className="dropdown-item" href="#" onClick={this.handleLogoutClick}>Logout</a>
+                  <Link
+                    to='/home'
+                    className="nav-link"
+                    id="list-logout-list"
+                    data-toggle="list"
+                    role="tab"
+                    aria-controls="logout"
+                  >
+                    Logout
+                  </Link>
                 </div>
               </li>
             )}
