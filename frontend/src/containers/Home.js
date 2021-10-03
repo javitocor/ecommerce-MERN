@@ -110,15 +110,18 @@ class Home extends Component {
                 </form>
               </div>
             </nav>
-
-            <section className="text-center mb-4">
-              <div className="row wow fadeIn">
-                {productsList.map(product=>(
-                  <ProductCard key={generateKey(product.name)} product={product} />
-                ))}
-              </div>
-            </section>
+            {productsList.length === 0 ? (<div className="d-flex justify-content-center align-items-center pt-5 w-100"><Spinner animation="grow" /></div>
+             ) : (
+              <section className="text-center mb-4">
+                <div className="row wow fadeIn">
+                  {productsList.map(product=>(
+                    <ProductCard key={generateKey(product.name)} product={product} />
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
+          
           <footer className={`${style.pagefooter} text-center font-small mt-4 wow fadeIn`}>
             <hr className="my-4" />
             <div className="pb-4">
