@@ -4,7 +4,7 @@ const customer = JSON.parse(localStorage.getItem("customer"));
 
 export const initialStateAuth =  customer 
 ? { loggedIn: true, customer }
-: { loggedIn: false, customer: null }
+: { loggedIn: false, customer: {} }
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";

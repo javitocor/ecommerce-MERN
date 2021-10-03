@@ -29,7 +29,8 @@ class Home extends Component {
   }
 
   render(){
-    const {productsList} = this.props;
+    const {products} = this.props;
+    const {productsList} = products;
     return (
         <main>
           <Carousel fade>
@@ -115,7 +116,7 @@ class Home extends Component {
               <section className="text-center mb-4">
                 <div className="row wow fadeIn">
                   {productsList.map(product=>(
-                    <ProductCard key={generateKey(product.name)} product={product} />
+                    <ProductCard key={generateKey(product._id)} product={product} />
                   ))}
                 </div>
               </section>

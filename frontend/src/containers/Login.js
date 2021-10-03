@@ -27,7 +27,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeEmail.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
@@ -86,7 +86,7 @@ class Login extends Component {
     const { loggedIn, message } = this.props;
 
     if (loggedIn) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/" />;
     }
 
     return (

@@ -1,3 +1,5 @@
+/* eslint-disable radix */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
@@ -8,23 +10,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import {getCookieData} from '../actions/cookies';
-import CartItem from './CartItem';
+import {getCookieData, updateCookieData} from '../actions/cookies';
+import CartItem from '../components/CartItem';
 import cartData from '../helpers/cartData';
 import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
-  const {cookies, getCart} = props;
+  const {cookies, getCart, updateCart} = props;
   const {cookie} = cookies;
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [order, setOrder] = useState({});
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const cart = await getCart('cart');
-        const data = await cartData(cart);
+        await getCart('cart');
+        const data = await cartData(cookie);
         setProducts(data.items);
         setTotal(data.cartItems);
         setOrder(data.order);
@@ -32,8 +35,18 @@ const Cart = (props) => {
         console.log(error)
       }           
     })();
-  }, [cookie]);
+  }, [rerender]);
 
+  function update(productId, quantity){
+    updateCart('cart', productId, parseInt(quantity));
+    setRerender(!rerender);        
+  }
+
+  function deleteProduct(productId){
+    updateCart('cart', productId, 0);
+    setRerender(!rerender);
+  }
+  
   return (
     <div className="container">
       <div className="col-md-9 col-sm-8 content">
@@ -67,8 +80,8 @@ const Cart = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {products.map(product=>(
-                        <CartItem product={product} />
+                      {products && products.map(product=>(
+                        <CartItem key={product._id} product={product} handleQuantity={update} deleteProduct={deleteProduct} />
                       ))}  
                       <tr>
                         <td colSpan="6">&nbsp;</td>
@@ -96,12 +109,8 @@ const Cart = (props) => {
                 </div>
               </div>
             </div>
-            <a href="#" className="btn btn-success">
-              <span className="glyphicon glyphicon-arrow-left" />
-                &nbsp;Continue Shopping
-            </a>
             <Link
-              to='/home'
+              to='/'
               className="btn btn-success"
               id="list-home-list"
               data-toggle="list"
@@ -111,10 +120,6 @@ const Cart = (props) => {
               <span className="glyphicon glyphicon-arrow-left" />
                 &nbsp;Continue Shopping
             </Link>
-            <a href="#" className="btn btn-primary pull-right">
-              Checkout
-              <span className="glyphicon glyphicon-chevron-right" />
-            </a>
             <Link
               to='/checkout'
               className="btn btn-primary pull-right"
@@ -139,6 +144,7 @@ Cart.propTypes = {
     cookie: PropTypes.object,
   }).isRequired,  
   getCart: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -148,6 +154,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  updateCart: updateCookieData,
   getCart: getCookieData,
 }, dispatch);
 

@@ -13,24 +13,25 @@ const ProductCard = props => {
 
   function handleSubmit(e){
     e.preventDefault();
-    updateCookie('cart', product.id, 1);
+    updateCookie('cart', product._id, 1);
   }
 
   return (
-    <Link 
-      className=""
-      id="list-home-list"
-      data-toggle="list"
-      role="tab"
-      aria-controls="home"
-      to={{
-              pathname: `/project/${product.name}`,
+    <div className="col-md-4 mt-2">
+      <Link 
+        className=""
+        id="list-home-list"
+        data-toggle="list"
+        role="tab"
+        aria-controls="home"
+        to={{
+              pathname: `/product/${product.name}`,
               state: {
                 id: product._id,
               },
             }}
-    >
-      <div className="col-md-4 mt-2">
+      >
+      
         <div className={`${style.card2} card`}>
           <div className={`card-body ${style.cardbody}`}>
             <div className={style.cardimageactions}> 
@@ -43,11 +44,11 @@ const ProductCard = props => {
             <div className="mb-2">
               <h6 className="font-weight-semibold mb-2"> 
                 {' '}
-                <a href="#" className="text-default mb-2" data-abc="true">{product.name}</a>
+                <p href="#" className="text-default mb-2" data-abc="true">{product.name}</p>
                 {' '}
               </h6> 
               {' '}
-              <a href="#" className="text-muted" data-abc="true">Laptops & Notebooks</a>
+              <p href="#" className="text-muted" data-abc="true">Laptops & Notebooks</p>
             </div>
             <h3 className="mb-0 font-weight-semibold">
               $
@@ -72,10 +73,9 @@ const ProductCard = props => {
               Add to cart
             </button>
           </div>
-        </div>
-      </div>
-    </Link>
-    
+        </div>      
+      </Link>
+    </div>
   );
 };
 

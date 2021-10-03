@@ -1,17 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import {updateCookieData} from '../actions/cookies';
 import style from '../style/CartItem.module.css';
 
 class CartItem extends React.Component{
@@ -28,15 +24,13 @@ class CartItem extends React.Component{
   };
 
   handleSubmit = (event) => {
-    const {product, updateCart} = this.props;
-    event.preventDefault();
-    updateCart('cart', product._id, this.state.quantity)
+    const {product} = this.props;
+    this.props.handleQuantity(product._id, this.state.quantity)
   };
 
   handleDelete = (event) => {
-    const {product, updateCart} = this.props;
-    event.preventDefault();
-    updateCart('cart', product._id, 0)
+    const {product} = this.props;
+    this.props.deleteProduct(product._id)
   };
 
   render() {
@@ -52,7 +46,7 @@ class CartItem extends React.Component{
             role="tab"
             aria-controls="home"
             to={{
-              pathname: `/project/${product.product.name}`,
+              pathname: `/product/${product.product.name}`,
               state: {
                 id: product.product._id,
               },
@@ -63,14 +57,14 @@ class CartItem extends React.Component{
         </td>
         <td>
           <form className="form-inline">
-            <input className="form-control" type="text" name={product._id} value={this.state.quantity} onChange={this.handleChange} />
-            <button rel="tooltip" className="btn btn-default" onSubmit={this.handleSubmit}><i className="fa fa-pencil" /></button>
-            <a className="btn btn-primary" onClick={this.handleDelete}><i className="fa fa-trash-o" /></a>
+            <input className="form-control" type="number" name={product._id} value={this.state.quantity} onChange={this.handleChange} />
+            <div className="btn btn-primary mr-2 ml-2" onClick={this.handleSubmit}><i className="far fa-edit" /></div>
+            <div className="btn btn-danger" onClick={this.handleDelete}><i className="fas fa-trash-alt" /></div>
           </form>
         </td>
         <td>
           $
-          {product.price}
+          {product.product.price}
         </td>
         <td>
           $
@@ -79,15 +73,12 @@ class CartItem extends React.Component{
       </tr>
     )
   }
-}
+};
+
 
 CartItem.propTypes = {
   product: PropTypes.object.isRequired,  
-  updateCart: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  updateCart: updateCookieData,
-}, dispatch);
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default CartItem;

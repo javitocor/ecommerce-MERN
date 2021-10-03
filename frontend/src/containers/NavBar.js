@@ -1,11 +1,14 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import {getCookieData} from '../actions/cookies';
 import navbar from '../style/NavBar.module.css'
 
 class NavBar extends Component {
@@ -14,9 +17,14 @@ class NavBar extends Component {
     this.props.history.push("/home");
   };
 
+  componentDidMount() {
+    const {getCart} = this.props;
+    getCart('cart')
+  }
+
   render(){
     const { loggedIn, customer } = this.props.auth;
-    const {cookie} = this.props.coookie
+    const {cookie} = this.props.cookies;
     return (
       <nav className={`navbar ${navbar.navbaricontop} navbar-expand-lg navbar-dark bg-success`}>
         <a className="navbar-brand" href="#">Snooker eCommerce</a>
@@ -28,7 +36,7 @@ class NavBar extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <Link
-                to='/home'
+                to='/'
                 className="nav-link"
                 id="list-home-list"
                 data-toggle="list"
@@ -56,9 +64,8 @@ class NavBar extends Component {
                 role="tab"
                 aria-controls="cart"
               >
-                <i className={`fas fa-shopping-cart ${navbar.icon}`}>
-                  <span className="badge badge-warning">{Object.keys(cookie).length}</span>
-                </i>
+                <span className="badge badge-warning">{cookie ? Object.keys(cookie).length : 0}</span>
+                <i className={`fas fa-shopping-cart ${navbar.icon}`} />
                 Cart
               </Link>
             </li>
@@ -124,7 +131,7 @@ class NavBar extends Component {
                   {customer.role === 'Role_Admin' && (
                     <Link
                       to='/profile'
-                      className="nav-link"
+                      className="dropdown-item"
                       id="list-profile-list"
                       data-toggle="list"
                       role="tab"
@@ -134,14 +141,14 @@ class NavBar extends Component {
                     </Link>
                   )}
                   <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="#" onClick={this.handleLogoutClick}>Logout</a>
                   <Link
-                    to='/home'
-                    className="nav-link"
+                    to='/'
+                    className="dropdown-item"
                     id="list-logout-list"
                     data-toggle="list"
                     role="tab"
                     aria-controls="logout"
+                    onClick={this.handleLogoutClick}
                   >
                     Logout
                   </Link>
@@ -163,6 +170,8 @@ NavBar.propTypes = {
   cookies: PropTypes.shape({
     cookie: PropTypes.object,
   }).isRequired,
+  getCart: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -175,4 +184,9 @@ const mapStateToProps = state => ({
   }  
 });
 
-export default connect(mapStateToProps, { logout })(withRouter(NavBar));
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCart: getCookieData,
+  logout
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

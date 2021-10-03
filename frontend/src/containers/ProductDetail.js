@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -23,10 +24,10 @@ class ProductDetail extends Component {
   }
 
   async componentDidMount() {
-    const { getSingle, location } = this.props;
+    const { getProduct, location } = this.props;
     const { id } = location.state;
     try {
-      await getSingle('products', id);
+      await getProduct('products', id);
     } catch (error) {
       console.log(error)
     }        
@@ -42,7 +43,7 @@ class ProductDetail extends Component {
     e.preventDefault();
     const {updateCookie, products} = this.props;
     const {product} = products;
-    updateCookie('cart', product._id, this.state.numberItems);
+    updateCookie('cart', product._id, parseInt(this.state.numberItems));
   }
 
   render(){
@@ -54,14 +55,14 @@ class ProductDetail extends Component {
           <div className="row wow fadeIn">
             <div className="col-md-6 mb-4">
 
-              <img src={placeholder} className="img-fluid" alt="" />
+              <img src={product.image} className="img-fluid" alt="" />
 
             </div>
             <div className="col-md-6 mb-4">
               <div className="p-4">
 
                 <div className="mb-3">
-                  {product.category.map(cat=>(
+                  {product.category && product.category.map(cat=>(
                     <a href="">
                       <span className="badge badge-info mr-1">{cat.name}</span>
                     </a>
@@ -78,7 +79,7 @@ class ProductDetail extends Component {
                   </span>
                 </p>
 
-                <p className="lead font-weight-bold">Description</p>
+                <p className="lead font-weight-bold">{product.name}</p>
 
                 <p>
                   {product.description}
@@ -177,7 +178,7 @@ ProductDetail.propTypes = {
     pending: PropTypes.bool,
     product: PropTypes.object,
   }).isRequired,  
-  getSingle: PropTypes.func.isRequired,
+  getProduct: PropTypes.func.isRequired,
   updateCookie: PropTypes.func.isRequired,
 };
 
