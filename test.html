@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>ECommerce App</title>
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/svg-with-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}
+.form .plan input{
+	display: none;
+}
+
+.form label{
+	position: relative;
+	color: #fff;
+	background-color: #aaa;
+	font-size: 26px;
+	text-align: center;
+	height: 150px;
+	line-height: 150px;
+	display: block;
+	cursor: pointer;
+	border: 3px solid transparent;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.form .plan input:checked + label{
+	border: 3px solid #333;
+	background-color: grey;
+}
+
+.form .plan input:checked + label:after{
+	content: "\2713";
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 100%;
+	border: 2px solid #333;
+	background-color: grey;
+	z-index: 999;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+}
+
+.center {
+  width: 55%;
+  font-size: 16px;
+    line-height: normal;
+    height: inherit;
+    padding: 13px 5px;
+}
+.right{
+  width: 20%;
+}
+.left {
+  width: 25%;
+  line-height: normal;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form cf mt-5">
+        <section class="plan cf d-flex flex-column">
+          <input type="radio" name="radio1" id="free" value="free"><label class="free-label d-flex flex-row justify-content-between align-items-center" for="free">
+            <div class="left">Basic</div>
+            <div class="center">
+              <div class="row text-left h-100">
+                <div class="col-3">
+                  Address:
+                </div>
+                <div class="col-9">
+                  {address.address}
+                </div>
+                <div class="col-3">
+                  City:
+                </div>
+                <div class="col-9">
+                  {address.city}
+                </div>
+                <div class="col-3">
+                  State:
+                </div>
+                <div class="col-9">
+                  {address.state}
+                </div>
+                <div class="col-3">
+                  Country:
+                </div>
+                <div class="col-9">
+                  {address.country}
+                </div>
+                <div class="col-3">
+                  Zip Code:
+                </div>
+                <div class="col-9">
+                  {address.zipcode}
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <a href="" class="btn btn-primary">Edit</a>
+              <a href="" class="btn btn-danger">Delete</a>
+            </div>
+          </label>
+        </section>	
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
