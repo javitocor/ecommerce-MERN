@@ -7,6 +7,7 @@ var order_controller = require('../controllers/orderController');
 
 router.get('/', [authJwt.verifyToken, authJwt.isAdmin], order_controller.order_list);
 router.get('/:id', [authJwt.verifyToken], order_controller.order_detail);
+router.get('/ordersbycustomer/:customer', [authJwt.verifyToken], order_controller.order_by_customer);
 router.post('/create', [authJwt.verifyToken], order_controller.order_create);
 router.put('/:id', [authJwt.verifyToken], order_controller.order_update);
 router.delete('/:id', [authJwt.verifyToken], order_controller.order_delete);

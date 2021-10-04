@@ -366,3 +366,20 @@ export const shippingAddressByCustomer = (customerId) => async dispatch => {
   };  
 };
 
+export const ordersByCustomer = (customerId) => async dispatch => {
+  try{
+    const url = `${URL_BASIC}orders/byCustomer`;
+    dispatch(orders.ordersPending());
+    const response = await fetch(`${url}/${customerId}`, { mode: 'cors',   headers: authHeader() });
+    const data = await response.json();
+    dispatch(setMessage(data.message));
+    dispatch(orders.getAllOrders(data.orders_by_customer));
+    return data
+  } catch (error) {
+    dispatch(setMessage(error));
+    console.log(error);
+    dispatch(orders.ordersError(error));
+  };  
+};
+
+

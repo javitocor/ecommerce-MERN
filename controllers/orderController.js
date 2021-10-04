@@ -77,3 +77,14 @@ exports.order_delete = async (req, res, next) => {
     next();
   }
 };
+
+exports.order_by_customer = async (req, res, next) => {
+  try {
+    const orders_by_customer = await Order.find({customer: req.params.customer});
+    res.status(200);
+    res.json({message: 'Orders by customer Successful', orders_by_customer});
+  } catch (error) {
+    res.json(error)
+    next();
+  }
+};
