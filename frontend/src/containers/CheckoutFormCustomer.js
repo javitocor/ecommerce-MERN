@@ -29,7 +29,7 @@ const CheckoutFormCustomer = props => {
 
   function handleChange (event) {
     if (event.target.name === 'shippingAddress') {
-      setShipping(event.target.checked)
+      setShipping(event.target.checked);
     }
   }
 
