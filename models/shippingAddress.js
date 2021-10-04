@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var ShippingAddressSchema = new Schema({
   customer: {type: Schema.ObjectId, ref: 'Customer', required: true},
-  order: {type: Schema.ObjectId, ref: 'Order'},
+  order: [{type: Schema.ObjectId, ref: 'Order'}],
   name: {type: String},
   address: {type: String},
   city: {type: String},
