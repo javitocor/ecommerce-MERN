@@ -22,6 +22,7 @@ const CheckoutFormCustomer = props => {
   const {customer} = auth;
   const {shippingList, pending} = shippingAddress;
   const [shipping, setShipping] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -55,6 +56,7 @@ const CheckoutFormCustomer = props => {
   }
 
   async function proceed(addressId) {
+    setLoading(true);
     const token = getCookie('csrftoken');
     const order = await createInstance('orders', token, {});
     const shipping = await updateInstance('shippingAddress', token, {order: order._id}, addressId);
@@ -67,6 +69,7 @@ const CheckoutFormCustomer = props => {
       }
       await createInstance('orderItems', token, temp);
     }
+    setLoading(false);
     history.push(
       {
         pathname: `/customer/${customer.customer.name}`,
@@ -132,7 +135,16 @@ const CheckoutFormCustomer = props => {
               </>
             ))}
           </section>
-          <button type='submit' className="btn btn-primary">Buy Items</button>	
+          <button
+            className="btn btn-primary btn-lg btn-block"
+            disabled={loading}
+            type="submit"
+          >
+            {loading && (
+              <span className="spinner-border spinner-border-sm" />
+                )}
+            <span>Buy Items</span>
+          </button>	
         </form>
 )
       }

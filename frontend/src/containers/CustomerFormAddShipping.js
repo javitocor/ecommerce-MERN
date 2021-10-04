@@ -133,7 +133,7 @@ class CustomerFormAddShipping extends Component  {
               {this.state.loading && (
               <span className="spinner-border spinner-border-sm" />
                 )}
-              <span>Add Shipping Address and Proceed</span>
+              <span>Add Shipping Address and Buy Items</span>
             </button>
           </div>
           <CheckButton
