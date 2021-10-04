@@ -76,3 +76,14 @@ exports.shippingAddress_delete = async (req, res, next) => {
     next();
   }
 };
+
+exports.shippingAddress_by_customer = async (req, res, next) => {
+  try {
+    const addresses_by_customer = await ShippingAddress.find({customer: req.params.customer});
+    res.status(200);
+    res.json({message: 'ShippingAddresses by customer Successful', addresses_by_customer});
+  } catch (error) {
+    res.json(error)
+    next();
+  };
+};

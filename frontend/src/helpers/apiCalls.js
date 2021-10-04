@@ -350,3 +350,19 @@ export const UpdateCall = (route, token, data, id) => async dispatch => {
   }
 };
 
+export const shippingAddressByCustomer = (customerId) => async dispatch => {
+  try{
+    const url = `${URL_BASIC}shippingAddress/byCustomer`;
+    dispatch(shippingAddress.shippingAddressesPending());
+    const response = await fetch(`${url}/${customerId}`, { mode: 'cors',   headers: authHeader() });
+    const data = await response.json();
+    dispatch(setMessage(data.message));
+    dispatch(shippingAddress.getAllShippingAddresses(data.addresses_by_customer));
+    return data
+  } catch (error) {
+    dispatch(setMessage(error));
+    console.log(error);
+    dispatch(shippingAddress.shippingAddressesError(error));
+  };  
+};
+
