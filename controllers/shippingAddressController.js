@@ -31,7 +31,7 @@ exports.shippingAddress_create = async (req, res, next) => {
     };
 
     try {
-      const {customer, order, address, city, state, zipcode} = req.body;
+      const {customer, order, address, city, state, zipcode, name} = req.body;
       const shippingAddress = new ShippingAddress({
         customer,
         order,
@@ -39,6 +39,7 @@ exports.shippingAddress_create = async (req, res, next) => {
         city,
         state,
         zipcode,
+        name,
       });
       await shippingAddress.save();
       res.status(201);

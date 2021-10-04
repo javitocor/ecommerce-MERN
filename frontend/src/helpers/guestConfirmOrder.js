@@ -28,6 +28,7 @@ async function guestConfirmOrder(state, token, cookie){
       city: state.city,
       state: state.state,
       zipcode: state.zipcode,
+      name: 'default',
       customer: customer.customer._id,
       order: order.order._id,
     };

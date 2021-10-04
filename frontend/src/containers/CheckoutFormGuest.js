@@ -15,6 +15,7 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { COUNTRIES} from '../constants/constants';
 import guestConfirmOrder from '../helpers/guestConfirmOrder';
+import style from '../style/CheckoutFormGuest.module.css';
 
 const required = (value) => {
   if (!value) {
