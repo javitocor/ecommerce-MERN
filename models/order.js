@@ -23,8 +23,8 @@ OrderSchema.methods.getTotalItems = async function() {
 
 OrderSchema.methods.getCartTotal = async function() {
   const totalItems = await OrderItem.find({ order: this._id})
-  totalItems.reduce((previousValue, currentValue) => { return previousValue + currentValue.getTotalPrice() }, 0 )
-  return total.length;
+  const total = totalItems.reduce((previousValue, currentValue) => { return previousValue + currentValue.getTotalPrice() }, 0 )
+  return total;
 }
 
 // Export model.

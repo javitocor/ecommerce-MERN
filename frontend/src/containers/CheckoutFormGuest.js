@@ -1,3 +1,5 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable no-plusplus */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
@@ -5,7 +7,6 @@
 import React, { Component} from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -61,6 +62,21 @@ class CheckoutFormGuest extends Component  {
     this.setState({[event.target.name]: event.target.value})
   };
 
+  getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (`${name  }=`)) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
   async handleSubmit (e) {
     e.preventDefault();
     this.setState({
@@ -68,8 +84,10 @@ class CheckoutFormGuest extends Component  {
     });
     this.form.validateAll();
     const {customer} = this.props.auth;
+    const {cookie} = this.props.cookies;
+    const token = this.getCookie('csrftoken');
     if (this.checkBtn.context._errors.length === 0) {
-      await guestConfirmOrder(this.state);
+      await guestConfirmOrder(this.state, token, cookie);
       this.props.history.push(
         {
           pathname: `/customer/${customer.customer.name}`,
@@ -172,7 +190,7 @@ class CheckoutFormGuest extends Component  {
               {this.state.loading && (
               <span className="spinner-border spinner-border-sm" />
                 )}
-              <span>Confirm personal data</span>
+              <span>Confirm personal data and shipping</span>
             </button>
           </div>
           <CheckButton
@@ -192,12 +210,18 @@ CheckoutFormGuest.propTypes = {
     loggedIn: PropTypes.bool,
     customer: PropTypes.object,
   }).isRequired,
+  cookies: PropTypes.shape({
+    cookie: PropTypes.object,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: {
     loggedIn: state.auth.loggedIn,
     customer: state.auth.customer,
+  },
+  cookies: {
+    cookie: state.cookies.cookie,
   },
 });
 

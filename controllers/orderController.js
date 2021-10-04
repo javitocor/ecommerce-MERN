@@ -32,7 +32,7 @@ exports.order_create = async (req, res, next) => {
 
     try {
       const order = new Order({
-        customer: req.customer._id,
+        customer: req.customerId,
       });
       await order.save();
       res.status(201);
