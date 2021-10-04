@@ -6,6 +6,7 @@ import NavBar from "../containers/NavBar";
 import Home from '../containers/Home';
 import ProductDetail from '../containers/ProductDetail';
 import Checkout from '../containers/Checkout';
+import PreCheckout from './PreCheckout';
 import Cart from '../containers/Cart';
 import Profile from '../containers/Profile';
 import AdminPanel from '../containers/AdminPanel';
@@ -20,6 +21,7 @@ const App = () => (
         <Route exact path="/" component={Home} />
         <Route exact path="/product/:name" component={ProductDetail} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/precheckout" component={PreCheckout} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />

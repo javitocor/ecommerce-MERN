@@ -16,7 +16,7 @@ import cartData from '../helpers/cartData';
 import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
-  const {cookies, getCart, updateCart} = props;
+  const {cookies, getCart, updateCart, loggedIn} = props;
   const {cookie} = cookies;
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -81,7 +81,7 @@ const Cart = (props) => {
               <div className="card-header">
                 <h3>
                   <img className="rounded img-thumbnail mr-4" src="https://bootdey.com/img/Content/user_3.jpg" />
-                  {props.auth.customer.username ? props.auth.customer.username : 'Anonymous Customer'}
+                  {props.auth.customer.username ? props.auth.customer.username : 'Guest Customer'}
                 </h3>
               </div>
               <div className="card-body"> 
@@ -142,20 +142,35 @@ const Cart = (props) => {
                 role="tab"
                 aria-controls="home"
               >
-                <span className="glyphicon glyphicon-arrow-left" />
+                <i className="fas fa-chevron-left" />
                 Continue Shopping
               </Link>
-              <Link
-                to='/checkout'
-                className="btn btn-primary pull-right"
-                id="list-home-list"
-                data-toggle="list"
-                role="tab"
-                aria-controls="home"
-              >
-                Checkout
-                <span className="glyphicon glyphicon-chevron-right" />
-              </Link>
+              {loggedIn && (
+                <Link
+                  to='/checkout'
+                  className="btn btn-primary pull-right"
+                  id="list-home-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="home"
+                >
+                  Checkout
+                  <i className="fas fa-chevron-right" />
+                </Link>
+              )}
+              {!loggedIn && (
+                <Link
+                  to='/precheckout'
+                  className="btn btn-primary pull-right"
+                  id="list-home-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="home"
+                >
+                  Checkout
+                  <i className="fas fa-chevron-right" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -171,6 +186,7 @@ Cart.propTypes = {
   }).isRequired,  
   auth: PropTypes.shape({
     customer: PropTypes.object,
+    loggedIn: PropTypes.bool,
   }).isRequired,  
   getCart: PropTypes.func.isRequired,
   updateCart: PropTypes.func.isRequired,
@@ -181,7 +197,8 @@ const mapStateToProps = state => ({
     cookie: state.cookies.cookie,
   },
   auth: {
-    customer: state.auth.customer
+    customer: state.auth.customer,
+    loggedIn:state.auth.loggedIn,
   }  
 });
 
