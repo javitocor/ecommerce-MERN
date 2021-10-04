@@ -69,7 +69,7 @@ class CheckoutFormGuest extends Component  {
     this.form.validateAll();
     const {customer} = this.props.auth;
     if (this.checkBtn.context._errors.length === 0) {
-      await guestConfirmOrder();
+      await guestConfirmOrder(this.state);
       this.props.history.push(
         {
           pathname: `/customer/${customer.customer.name}`,
