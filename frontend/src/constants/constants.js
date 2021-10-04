@@ -123,3 +123,5 @@ export const ORDERITEMS_PENDING = 'ORDERITEMS_PENDING';
 export const GET_COOKIE = 'GET_COOKIE';
 export const UPDATE_COOKIE = 'UPDATE_COOKIE';
 export const DELETE_COOKIE = 'DELETE_COOKIE';
+
+export const COUNTRIES = ['United States', 'Viet Nam', 'Thailand', 'Germany', 'Taiwan', 'Hong Kong', 'Philippines', 'Myanmar', 'Cambodia', 'Laos', 'Indonesia', 'Japan', 'South Korea'];

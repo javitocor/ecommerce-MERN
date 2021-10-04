@@ -16,7 +16,8 @@ import cartData from '../helpers/cartData';
 import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
-  const {cookies, getCart, updateCart, loggedIn} = props;
+  const {cookies, getCart, updateCart, auth} = props;
+  const {loggedIn} = auth;
   const {cookie} = cookies;
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);

@@ -30,8 +30,8 @@ const PreCheckout = props => {
             role="tab"
             aria-controls="home"
           >
+            <i className="fas fa-sign-in-alt" />
             Login
-            <i className="fas fa-chevron-right" />
           </Link>
         </div>
         <div className="row">
@@ -43,8 +43,8 @@ const PreCheckout = props => {
             role="tab"
             aria-controls="home"
           >
+            <i className="fas fa-user-plus" />
             Signup
-            <i className="fas fa-chevron-right" />
           </Link>
         </div>
         <div className="row">
