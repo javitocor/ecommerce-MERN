@@ -1,11 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import style from '../style/PreCheckout.module.css';
 
 
 const PreCheckout = props => {
+  const {loggedIn} = props;
 
+  if (loggedIn) {
+    return <Redirect to="/checkout" />;
+  }
+  
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col-md-9 col-sm-8 mt-5 d-flex flex-column align-items-center justify-content-end w-100">
@@ -58,4 +65,15 @@ const PreCheckout = props => {
   );
 };
 
-export default PreCheckout;
+PreCheckout.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state) {
+  const { loggedIn } = state.auth;
+  return {
+    loggedIn,
+  };
+}
+
+export default withRouter(connect(mapStateToProps, null)(PreCheckout));
