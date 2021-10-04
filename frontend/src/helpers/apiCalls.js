@@ -368,7 +368,7 @@ export const shippingAddressByCustomer = (customerId) => async dispatch => {
 
 export const ordersByCustomer = (customerId) => async dispatch => {
   try{
-    const url = `${URL_BASIC}orders/byCustomer`;
+    const url = `${URL_BASIC}orders/ordersbycustomer`;
     dispatch(orders.ordersPending());
     const response = await fetch(`${url}/${customerId}`, { mode: 'cors',   headers: authHeader() });
     const data = await response.json();
