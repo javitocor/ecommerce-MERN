@@ -1,21 +1,20 @@
 /* eslint-disable react/sort-comp */
 /* eslint-disable no-plusplus */
-/* eslint-disable react/forbid-prop-types */
 /* eslint-disable consistent-return */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component} from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import {CreateCall} from '../helpers/apiCalls';
 import { COUNTRIES} from '../constants/constants';
-import guestConfirmOrder from '../helpers/guestConfirmOrder';
-import style from '../style/CheckoutFormGuest.module.css';
 
 const required = (value) => {
   if (!value) {
@@ -27,31 +26,11 @@ const required = (value) => {
   }
 };
 
-const email = (value) => {
-  if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
-
 const dropMenuCountries = COUNTRIES.map(
   country => <option key={country} value={country}>{country}</option>,
 );
 
-class CheckoutFormGuest extends Component  {
+class CustomerFormAddShipping extends Component  {
   constructor(props) {
     super(props)
     this.state = {
@@ -62,6 +41,27 @@ class CheckoutFormGuest extends Component  {
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
+  };
+
+  async handleSubmit (e) {
+    e.preventDefault();
+    this.setState({
+      loading: true,
+    });
+    this.form.validateAll();
+    const {createAddress, proceed} = this.props;
+    const token = this.getCookie('csrftoken');
+    if (this.checkBtn.context._errors.length === 0) {
+      const newAddress = await createAddress('shippingAddress', token, this.state)
+      proceed(newAddress.shippingAddress._id);
+      this.setState({
+        loading: false,
+      });
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
   };
 
   getCookie = (name) => {
@@ -79,33 +79,6 @@ class CheckoutFormGuest extends Component  {
     return cookieValue;
   }
 
-  async handleSubmit (e) {
-    e.preventDefault();
-    this.setState({
-      loading: true,
-    });
-    this.form.validateAll();
-    const {customer} = this.props.auth;
-    const {cookie} = this.props.cookies;
-    const token = this.getCookie('csrftoken');
-    if (this.checkBtn.context._errors.length === 0) {
-      await guestConfirmOrder(this.state, token, cookie);
-      this.props.history.push(
-        {
-          pathname: `/customer/${customer.customer.name}`,
-          state: { id: customer.customer._id }
-        }
-      )
-      this.setState({
-        loading: false,
-      });
-    } else {
-      this.setState({
-        loading: false,
-      });
-    }
-  };
-
   render(){
     return (
       <div className="card">
@@ -115,39 +88,7 @@ class CheckoutFormGuest extends Component  {
           ref={(c) => {
               this.form = c;
             }}
-        >
-          <div className="row">
-            <div className="col-md-6 mb-2">
-              <div className="md-form ">
-                <Input type="text" name="firstname" id="firstName" className="form-control" onChange={this.handleChange} validations={[required]} />
-                <label htmlFor="firstName" className="">First name</label>
-              </div>
-            </div>
-            <div className="col-md-6 mb-2">
-              <div className="md-form">
-                <Input type="text" name="lastname" id="lastName" className="form-control" onChange={this.handleChange} validations={[required]} />
-                <label htmlFor="lastName" className="">Last name</label>
-              </div>
-            </div>
-          </div>
-          <div className="md-form input-group pl-0 mb-5">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="basic-addon1">@</span>
-            </div>
-            <Input type="text" className="form-control py-0" placeholder="Username" aria-describedby="basic-addon1" />
-          </div>
-          <div className="md-form mb-5">
-            <Input type="text" id="email" name="email" className="form-control" placeholder="youremail@example.com" onChange={this.handleChange} validations={[required, email]} />
-            <label htmlFor="email" className="">Email</label>
-          </div>
-          <div className="md-form mb-5">
-            <Input type="password" id="password" name="password" className="form-control" placeholder="Add your password" onChange={this.handleChange} validations={[required, vpassword]} />
-            <label htmlFor="address" className="">Password</label>
-          </div>
-          <div className="md-form mb-5">
-            <Input type="text" id="phone" name="phone" className="form-control" placeholder="Add your phone number" onChange={this.handleChange} validations={[required]} />
-            <label htmlFor="address" className="">Phone</label>
-          </div>
+        >  
           <div className="md-form mb-5">
             <Input type="text" id="address" name="address" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="address" className="">Address</label>
@@ -192,7 +133,7 @@ class CheckoutFormGuest extends Component  {
               {this.state.loading && (
               <span className="spinner-border spinner-border-sm" />
                 )}
-              <span>Confirm personal data and shipping</span>
+              <span>Add Shipping Address and Proceed</span>
             </button>
           </div>
           <CheckButton
@@ -205,16 +146,20 @@ class CheckoutFormGuest extends Component  {
       </div>
     );
   };
-}
+};
 
-CheckoutFormGuest.propTypes = {
+CustomerFormAddShipping.propTypes = {
   auth: PropTypes.shape({
     loggedIn: PropTypes.bool,
     customer: PropTypes.object,
   }).isRequired,
-  cookies: PropTypes.shape({
-    cookie: PropTypes.object,
+  shippingAddress: PropTypes.shape({
+    error: PropTypes.object,
+    pending: PropTypes.bool,
+    shippingList: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
+  createAddress: PropTypes.func.isRequired,
+  proceed:  PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -222,11 +167,15 @@ const mapStateToProps = state => ({
     loggedIn: state.auth.loggedIn,
     customer: state.auth.customer,
   },
-  cookies: {
-    cookie: state.cookies.cookie,
-  },
+  shippingAddress: {
+    pending: state.shippingAddress.pending,
+    error: state.shippingAddress.error,
+    shippingList: state.shippingAddress.shippingList,
+  }
 });
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  createAddress: CreateCall,
+}, dispatch);
 
-
-export default connect(mapStateToProps, null)(CheckoutFormGuest);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerFormAddShipping);

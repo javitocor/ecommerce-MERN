@@ -31,9 +31,9 @@ exports.shippingAddress_create = async (req, res, next) => {
     };
 
     try {
-      const {customer, order, address, city, state, zipcode, name} = req.body;
+      const {order, address, city, state, zipcode, name} = req.body;
       const shippingAddress = new ShippingAddress({
-        customer,
+        customer: req.customerId,
         order,
         address,
         city,
