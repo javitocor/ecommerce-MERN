@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -12,6 +13,7 @@ import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { COUNTRIES} from '../constants/constants';
+import guestConfirmOrder from '../helpers/guestConfirmOrder';
 
 const required = (value) => {
   if (!value) {
@@ -59,14 +61,24 @@ class CheckoutFormGuest extends Component  {
     this.setState({[event.target.name]: event.target.value})
   };
 
-  handleSubmit = (e) => {
+  async handleSubmit (e) {
     e.preventDefault();
     this.setState({
       loading: true,
     });
     this.form.validateAll();
+    const {customer} = this.props.auth;
     if (this.checkBtn.context._errors.length === 0) {
-
+      await guestConfirmOrder();
+      this.props.history.push(
+        {
+          pathname: `/customer/${customer.customer.name}`,
+          state: { id: customer.customer._id }
+        }
+      )
+      this.setState({
+        loading: false,
+      });
     } else {
       this.setState({
         loading: false,
@@ -175,4 +187,20 @@ class CheckoutFormGuest extends Component  {
   };
 }
 
-export default CheckoutFormGuest;
+CheckoutFormGuest.propTypes = {
+  auth: PropTypes.shape({
+    loggedIn: PropTypes.bool,
+    customer: PropTypes.object,
+  }).isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: {
+    loggedIn: state.auth.loggedIn,
+    customer: state.auth.customer,
+  },
+});
+
+
+
+export default connect(mapStateToProps, null)(CheckoutFormGuest);

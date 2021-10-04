@@ -14,7 +14,7 @@ import navbar from '../style/NavBar.module.css'
 class NavBar extends Component {
   handleLogoutClick = () => {
     this.props.logout();
-    this.props.history.push("/home");
+    this.props.history.push("/");
   };
 
   componentDidMount() {
@@ -107,7 +107,10 @@ class NavBar extends Component {
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link
-                    to='/profile'
+                    to={{
+                      pathname: `/customer/${customer.customer.name}`,
+                      state: { id: customer.customer._id }
+                    }}
                     className="dropdown-item"
                     id="list-profile-list"
                     data-toggle="list"
@@ -118,7 +121,7 @@ class NavBar extends Component {
                   </Link>
                   {customer.role === 'Role_Admin' && (
                     <Link
-                      to='/profile'
+                      to='/adminPanel'
                       className="dropdown-item"
                       id="list-profile-list"
                       data-toggle="list"
