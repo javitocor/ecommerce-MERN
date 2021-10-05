@@ -82,7 +82,7 @@ const Cart = (props) => {
               <div className="card-header">
                 <h3>
                   <img className="rounded img-thumbnail mr-4" src="https://bootdey.com/img/Content/user_3.jpg" />
-                  {auth.customer ? auth.customer.username : 'Guest Customer'}
+                  {auth.customer ? auth.customer.customer.username : 'Guest Customer'}
                 </h3>
               </div>
               <div className="card-body"> 
@@ -144,6 +144,7 @@ const Cart = (props) => {
                 aria-controls="home"
               >
                 <i className="fas fa-chevron-left" />
+                {' '}
                 Continue Shopping
               </Link>
               {loggedIn && (
@@ -156,6 +157,7 @@ const Cart = (props) => {
                   aria-controls="home"
                 >
                   Checkout
+                  {' '}
                   <i className="fas fa-chevron-right" />
                 </Link>
               )}
@@ -169,6 +171,7 @@ const Cart = (props) => {
                   aria-controls="home"
                 >
                   Checkout
+                  {' '}
                   <i className="fas fa-chevron-right" />
                 </Link>
               )}
