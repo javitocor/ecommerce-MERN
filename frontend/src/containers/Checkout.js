@@ -43,11 +43,11 @@ const Checkout = props => {
 
   console.log()
   return (
-    <main className="mt-5 pt-4">
-      <div className="container wow fadeIn">
+    <main className="mt-2 pt-3">
+      <div className="container">
         <h2 className="my-5 h2 text-center">{loggedIn ? 'Checkout Info': 'Checkout form'}</h2>
         <div className="row">
-          <div className="col-md-8 mb-4">
+          <div className={`col-md-8 mb-4 ${style.shadow}`}>
             {loggedIn 
             ? <CheckoutFormCustomer />
             : <CheckoutFormGuest  />
@@ -56,14 +56,14 @@ const Checkout = props => {
           <div className="col-md-4 mb-4">
             <h4 className="d-flex justify-content-between align-items-center mb-3">
               <span className="text-muted">Your cart</span>
-              <span className="badge badge-secondary badge-pill">{totalItems}</span>
+              <span className="badge badge-info badge-pill">{totalItems}</span>
             </h4>
-            <ul className="list-group mb-3 z-depth-1">
+            <ul className={`list-group mb-3 z-depth-1 ${style.shadowcart}`}>
               {products && products.map(product =>(
                 <li className="list-group-item d-flex justify-content-between lh-condensed">
                   <div>
                     <h6 className="my-0">
-                      {product.product.name.substr(0, 11)}
+                      {product.product.name.substr(0, 19)}
                       ...
                     </h6>
                     <small className="text-muted">
@@ -96,32 +96,7 @@ const Checkout = props => {
           </div>
         </div>
       </div>
-      <footer className="page-footer text-center font-small mt-4 wow fadeIn">
-
-      <hr className="my-4" />
-      <div className="pb-4">
-        <a href="#" target="_blank">
-          <i className="fab fa-facebook-f mr-3" />
-        </a>
-
-        <a href="#" target="_blank">
-          <i className="fab fa-twitter mr-3" />
-        </a>
-
-        <a href="#" target="_blank">
-          <i className="fab fa-github mr-3" />
-        </a>
-
-        <a href="#" target="_blank">
-          <i className="fab fa-codepen mr-3" />
-        </a>
-      </div>
-      <div className="footer-copyright py-3">
-        © 2018 Copyright:
-        <a href="#" target="_blank"> JaviCorp </a>
-      </div>
-
-      </footer>
+      
     </main>
   ); 
 };

@@ -110,7 +110,7 @@ class CheckoutFormGuest extends Component  {
 
   render(){
     return (
-      <div className="card">
+      <div className={`card ${style.card2}`}>
         <Form 
           className="card-body"
           onSubmit={this.handleSubmit}
@@ -136,11 +136,11 @@ class CheckoutFormGuest extends Component  {
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">@</span>
             </div>
-            <Input type="text" name="username" className="form-control py-0" placeholder="Username" aria-describedby="basic-addon1" onChange={this.handleChange} />
+            <input type="text" name='email' className="form-control py-0" placeholder="Email" aria-describedby="basic-addon1" onChange={this.handleChange} validations={[required, email]} />
           </div>
-          <div className={`${style.mdform} mb-5`}>
-            <Input type="text" id="email" name="email" className="form-control" placeholder="youremail@example.com" onChange={this.handleChange} validations={[required, email]} />
-            <label htmlFor="email" className="">Email</label>
+          <div className={`${style.mdform} mb-5`}>            
+            <Input type="text" id="username" name="username" className="form-control" placeholder="Add Username" onChange={this.handleChange} validations={[required]} />
+            <label htmlFor="username" className={style.label}>Username</label>
           </div>
           <div className={`${style.mdform} mb-5`}>
             <Input type="password" id="password" name="password" className="form-control" placeholder="Add your password" onChange={this.handleChange} validations={[required, vpassword]} />
@@ -187,7 +187,7 @@ class CheckoutFormGuest extends Component  {
           <hr className="mb-4" />
           <div className="form-group">
             <button
-              className="btn btn-primary btn-lg btn-block"
+              className="btn btn-info btn-lg btn-block"
               disabled={this.state.loading}
               type="submit"
             >
