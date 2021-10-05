@@ -3,7 +3,11 @@ main {
 }
 
 .carousel {
-  height: 25%;
+  height: 35rem !important;
+}
+
+.carouselcont {
+  height: 35rem !important;
 }
 
 @media (max-width: 740px) {

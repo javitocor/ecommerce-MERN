@@ -33,43 +33,45 @@ class Home extends Component {
     const {productsList} = products;
     return (
         <main>
+          <div className={style.carouselcont}>
           <Carousel fade>
             <Carousel.Item>
               <img
                 className={`d-block w-100 ${style.carousel}`}
-                src={placeholder}
+                src="https://images.pexels.com/photos/331990/pexels-photo-331990.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h3>Best Deals!!!</h3>
+                <p>Get the best deals in the web!!!.</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img
                 className={`d-block w-100 ${style.carousel}`}
-                src={placeholder}
+                src="https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                 alt="Second slide"
               />
 
               <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>Free shipping</h3>
+                <p>You do not have to pay extra cost for the shipping.</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img
                 className={`d-block w-100 ${style.carousel}`}
-                src={placeholder}
+                src="https://images.pexels.com/photos/1134166/pexels-photo-1134166.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                 alt="Third slide"
               />
 
               <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                <h3>Best brands, New Products</h3>
+                <p>the latest products by hand.</p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
+          </div>
           <div className="container">            
             <nav className="navbar navbar-expand-lg navbar-dark bg-success mt-3 mb-5">
               <span className="navbar-brand">Categories:</span>
