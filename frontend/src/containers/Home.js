@@ -1,3 +1,5 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -10,22 +12,45 @@ import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import Carousel from 'react-bootstrap/Carousel'
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from './ProductCard';
 import { AllCall } from '../helpers/apiCalls';
 import style from '../style/Home.module.css';
-import placeholder from '../assets/placeholder.png';
 import generateKey from '../helpers/generateKey';
 
 class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { 
+      count:{
+        prev: 0,
+        next: 12
+      },
+      hasMore: true,
+      current: [],
+    }
+  }
 
   async componentDidMount() {
     const { getAll, auth } = this.props;
     const { customer } = auth;
     try {
       await getAll('products', customer.customer);
+      this.setState({current: this.props.products.productsList.slice(this.state.count.prev, this.state.count.next)})
     } catch (error) {
       console.log(error)
     }        
+  }
+
+  getMoreData = () => {
+    if (this.state.current.length >= this.props.products.productsList.length) {
+      this.setState({HasMore: false});
+      return;
+    }
+    setTimeout(() => {
+      this.setState({current: this.state.current.concat(this.props.products.productsList.slice(this.state.count.prev + 12, this.state.count.next + 12))})
+    }, 2000)
+    this.setState({count:{ prev: this.state.count.prev + 12, next: this.state.count.next + 12 }})
   }
 
   render(){
@@ -73,7 +98,7 @@ class Home extends Component {
           </Carousel>
           </div>
           <div className="container">            
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success mt-3 mb-5">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-info mt-3 mb-5">
               <span className="navbar-brand">Categories:</span>
               <button
                 className="navbar-toggler"
@@ -115,54 +140,62 @@ class Home extends Component {
             </nav>
             {productsList.length === 0 ? (<div className="d-flex justify-content-center align-items-center pt-5 w-100"><Spinner animation="grow" /></div>
              ) : (
+              <InfiniteScroll
+                style={{overflow: 'hidden'}}
+                dataLength={this.state.current.length}
+                next={this.getMoreData}
+                hasMore={this.state.hasMore}
+                loader={<div className="d-flex justify-content-center align-items-center pt-5 w-100"><Spinner animation="grow" /></div>}
+              >
               <section className="text-center mb-4">
                 <div className="row wow fadeIn">
-                  {productsList.map(product=>(
+                  {this.state.current && this.state.current.map(product=>(
                     <ProductCard key={generateKey(product._id)} product={product} />
                   ))}
                 </div>
               </section>
+              </InfiniteScroll>          
             )}
           </div>
           
-          <footer className={`${style.pagefooter} text-center font-small mt-4 wow fadeIn`}>
+          <footer className={`${style.pagefooter} text-center font-small mt-4 bg-info`}>
             <hr className="my-4" />
             <div className="pb-4">
-              <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-facebook-f mr-3" />
               </a>
 
-              <a href="https://twitter.com/MDBootstrap" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-twitter mr-3" />
               </a>
 
-              <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-youtube mr-3" />
               </a>
 
-              <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-google-plus-g mr-3" />
               </a>
 
-              <a href="https://dribbble.com/mdbootstrap" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-dribbble mr-3" />
               </a>
 
-              <a href="https://pinterest.com/mdbootstrap" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-pinterest mr-3" />
               </a>
 
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-github mr-3" />
               </a>
 
-              <a href="http://codepen.io/mdbootstrap/" target="_blank">
+              <a href="#" target="_blank">
                 <i className="fab fa-codepen mr-3" />
               </a>
             </div>
             <div className="footer-copyright py-3 text-white">
               © 2018 Copyright:
-              <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> JaviCorp </a>
+              <a href="#" target="_blank"> JaviCorp </a>
             </div>
     
           </footer>
