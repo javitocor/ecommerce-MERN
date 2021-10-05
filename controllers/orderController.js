@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const ShippingAddress = require('../models/shippingAddress');
 
 const { validationResult } = require("express-validator");
 
@@ -80,7 +81,13 @@ exports.order_delete = async (req, res, next) => {
 
 exports.order_by_customer = async (req, res, next) => {
   try {
-    const orders_by_customer = await Order.find({customer: req.params.customer});
+    const orders_by_customer = await Order.find({customer: req.params.customer}).sort({ created_at: -1 });
+    for (let i = 0; i < orders_by_customer.length; i++){
+      orders_by_customer[i]['totalItems'] = orders_by_customer[i].getTotalItems();
+      orders_by_customer[i]['totalAmount'] = orders_by_customer[i].getCartTotal();
+      const shipping = await ShippingAddress.findOne({order:orders_by_customer[i]._id });
+      orders_by_customer[i]['shipping'] = shipping.name;
+    };
     res.status(200);
     res.json({message: 'Orders by customer Successful', orders_by_customer});
   } catch (error) {
