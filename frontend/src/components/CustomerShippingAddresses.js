@@ -67,11 +67,11 @@ const CustomerShippingAddresses = props => {
                     role="tab"
                     aria-controls="home"
                   >
-                    <i className="far fa-edit" />
+                    <i className="far fa-edit mr-2" />
                     Edit
                   </Link>
                   <div className="btn btn-danger" onClick={handleDelete(address._id)}>
-                    <i className="fas fa-trash-alt" />
+                    <i className="fas fa-trash-alt mr-2" />
                     {' '}
                     Delete
                   </div>
