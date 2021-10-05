@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/role-supports-aria-props */
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/sort-comp */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -26,50 +29,80 @@ class NavBar extends Component {
     const { loggedIn, customer } = this.props.auth;
     const {cookie} = this.props.cookies;
     return (
-      <nav className={`navbar ${navbar.navbaricontop} navbar-expand-lg navbar-dark bg-success`}>
-        <a className="navbar-brand" href="#">Snooker eCommerce</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </button>
+      <header>
+        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${navbar.top}`}>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <Link
-                to='/'
-                className="nav-link"
-                id="list-home-list"
-                data-toggle="list"
-                role="tab"
-                aria-controls="home"
-              >
-                <i className={`fa fa-home ${navbar.icon}`} />
-                Home
-              </Link>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                <i className={`fas fa-clipboard-list ${navbar.icon}`} />
-                Categories
-              </a>
-            </li>
-          </ul>
-          <ul className="navbar-nav ">
-            <li className="nav-item active d-flex justify-content-center align-items-center">
-              <Link
-                to='/cart'
-                className="nav-link"
-                id="list-cart-list"
-                data-toggle="list"
-                role="tab"
-                aria-controls="cart"
-              >
-                <span className="badge badge-warning position-relative">{cookie ? Object.keys(cookie).length : 0}</span>
-                <i className={`fas fa-shopping-cart ${navbar.icon}`} />
-                Cart
-              </Link>
-            </li> 
-            {!loggedIn && ( 
+          <div className="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i className="fab fa-facebook-f" />
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#"><i className="fab fa-twitter" /></a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#"><i className="fab fa-instagram" /></a>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="http://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Language</a>
+                <div className="dropdown-menu" aria-labelledby="dropdown08">
+                  <a className="dropdown-item" href="#">English</a>
+                  <a className="dropdown-item" href="#">Japanese</a>
+                  <a className="dropdown-item" href="#">Vietnamese</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+          <a className="navbar-brand" href="#">eCommerce</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link
+                  to='/'
+                  className="nav-link"
+                  id="list-home-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="home"
+                >
+                  <i className={`fa fa-home ${navbar.icon}`} />
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <a className="nav-link" href="#">
+                  <i className={`fas fa-clipboard-list ${navbar.icon}`} />
+                  Categories
+                </a>
+              </li>
+            </ul>
+            <ul className="navbar-nav ">
+              <li className="nav-item active">
+                <Link
+                  to='/cart'
+                  className="nav-link"
+                  id="list-cart-list"
+                  data-toggle="list"
+                  role="tab"
+                  aria-controls="cart"
+                >
+                  <span id={navbar.lblCartCount} className={`badge badge-warning position-absolute ${navbar.badge2}`}>{cookie ? Object.keys(cookie).length : 0}</span>
+                  <i className={`fas fa-shopping-cart ${navbar.icon}`} />
+                  Cart
+                </Link>
+              </li> 
+              {!loggedIn && ( 
               <>          
                 <li className="nav-item active">
                   <Link
@@ -99,7 +132,7 @@ class NavBar extends Component {
                 </li>
               </>
             )}
-            {loggedIn && (
+              {loggedIn && (
               <li className="nav-item d-flex justify-content-center align-items-center">
                 <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i className={`fas fa-id-card ${navbar.icon}`} />
@@ -146,9 +179,10 @@ class NavBar extends Component {
                 </div>
               </li>
             )}
-          </ul>
-        </div>
-      </nav>
+            </ul>
+          </div>
+        </nav>
+      </header>
     );
   };  
 };

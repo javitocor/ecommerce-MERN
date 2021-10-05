@@ -14,10 +14,12 @@
   top: -10px;
 }
 
-.icon {
+.badge2{
+  z-index: 3000;
 }
 
-.icon > .badge {
+.top {
+  height: 1.8rem;
 }
 
 @media (min-width: 576px) {
