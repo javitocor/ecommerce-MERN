@@ -1,0 +1,66 @@
+.empprofile{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.profileimg{
+  text-align: center;
+}
+.profileimg img{
+  width: 70%;
+  height: 100%;
+}
+.profilehead h5{
+  color: #333;
+}
+.profilehead h6{
+  color: #0062cc;
+}
+.profileeditbtn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.profilehead .nav-tabs{
+  margin-bottom:5%;
+}
+.profilehead .nav-tabs .nav-link{
+  font-weight:600;
+  border: none;
+}
+.profilehead .nav-tabs .nav-link.active{
+  border: none;
+  border-bottom:2px solid #0062cc;
+}
+.profilework{
+  padding: 14%;
+  margin-top: -15%;
+}
+.profilework p{
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+.profilework a{
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+.profilework ul{
+  list-style: none;
+}
+.profiletab label{
+  font-weight: 600;
+}
+.profiletab p{
+  font-weight: 600;
+  color: #0062cc;
+}
