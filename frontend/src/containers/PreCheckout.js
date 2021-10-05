@@ -15,48 +15,51 @@ const PreCheckout = props => {
   
   return (
     <div className="container d-flex justify-content-center align-items-center">
-      <div className="col-md-9 col-sm-8 mt-5 d-flex flex-column align-items-center justify-content-end w-100">
-        <div className="row">
+      <div className={`col-md-9 col-sm-8 mt-5 d-flex flex-column align-items-center justify-content-end w-100 ${style.panelshadow}`}>
+        <div className="row mb-5 mt-5">
           <h3>
             Become a member!
           </h3>
         </div>
-        <div className="row">
+        <div className="row mb-5">
           <Link
             to='/login'
-            className="btn btn-primary"
+            className="btn btn-info btn-lg"
             id="list-home-list"
             data-toggle="list"
             role="tab"
             aria-controls="home"
           >
             <i className="fas fa-sign-in-alt" />
+            {' '}
             Login
           </Link>
         </div>
-        <div className="row">
+        <div className="row mb-5">
           <Link
             to='/signup'
-            className="btn btn-primary"
+            className="btn btn-info btn-lg"
             id="list-home-list"
             data-toggle="list"
             role="tab"
             aria-controls="home"
           >
             <i className="fas fa-user-plus" />
+            {' '}
             Signup
           </Link>
         </div>
-        <div className="row">
+        <div className="row mb-5">
           <Link
             to='/checkout'
-            className="btn btn-primary pull-right"
+            className="btn btn-info btn-lg"
             id="list-home-list"
             data-toggle="list"
             role="tab"
             aria-controls="home"
           >
-            Continua as Guest
+            Continue as Guest
+            {' '}
             <i className="fas fa-chevron-right" />
           </Link>
         </div>

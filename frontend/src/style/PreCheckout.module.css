@@ -1,0 +1,5 @@
+.panelshadow {
+  box-shadow: 16px 14px 23px 17px rgba(89,84,84,0.77);
+  -webkit-box-shadow: 16px 14px 23px 17px rgba(89,84,84,0.77);
+  -moz-box-shadow: 16px 14px 23px 17px rgba(89,84,84,0.77);
+}
