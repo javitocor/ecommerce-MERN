@@ -1,0 +1,57 @@
+.mdform .form-control {
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+.mdform .form-control {
+  height: auto;
+  padding: .6rem 0 .4rem 0;
+  margin: 0 0 .5rem 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.mdform input:not([type]), .mdform input[type="text"]:not(.browser-default), .mdform input[type="password"]:not(.browser-default), .mdform input[type="email"]:not(.browser-default), .mdform input[type="url"]:not(.browser-default), .mdform input[type="time"]:not(.browser-default), .mdform input[type="date"]:not(.browser-default), .mdform input[type="datetime"]:not(.browser-default), .mdform input[type="datetime-local"]:not(.browser-default), .mdform input[type="tel"]:not(.browser-default), .mdform input[type="number"]:not(.browser-default), .mdform input[type="search"]:not(.browser-default), .mdform input[type="phone"]:not(.browser-default), .mdform input[type="search-md"], .mdform textarea.md-textarea {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.label {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.mdform>label {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.mdform label.active {
+  -webkit-transform: translateY(-14px) scale(0.8);
+  transform: translateY(-14px) scale(0.8);
+  font-size: 1rem;
+}
+
+.card2 {
+  border: none;
+}

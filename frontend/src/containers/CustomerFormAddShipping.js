@@ -15,6 +15,7 @@ import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import {CreateCall} from '../helpers/apiCalls';
 import { COUNTRIES} from '../constants/constants';
+import style from '../style/CustomerFormAddShipping.module.css';
 
 const required = (value) => {
   if (!value) {
@@ -81,7 +82,7 @@ class CustomerFormAddShipping extends Component  {
 
   render(){
     return (
-      <div className="card">
+      <div className={`card ${style.card2}`}>
         <Form 
           className="card-body"
           onSubmit={this.handleSubmit}
@@ -89,15 +90,15 @@ class CustomerFormAddShipping extends Component  {
               this.form = c;
             }}
         >  
-          <div className="md-form mb-5">
-            <Input type="text" id="name" name="name" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
+          <div className={`${style.mdform} mb-5`}>
+            <Input type="text" id="name" name="name" className="form-control" placeholder="Name" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="name" className="">Name</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="address" name="address" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="address" className="">Address</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="city" name="city" className="form-control" placeholder="Add city" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="city" className="">City</label>
           </div>
@@ -111,7 +112,7 @@ class CustomerFormAddShipping extends Component  {
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="state">State</label>
-              <Input className="custom-select d-block w-100" id="state" name="state" validations={[required]} />
+              <Input type='text' className="form-control" id="state" name="state" validations={[required]} />
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="zip">Zip Code</label>
@@ -130,14 +131,14 @@ class CustomerFormAddShipping extends Component  {
           <hr className="mb-4" />
           <div className="form-group">
             <button
-              className="btn btn-primary btn-lg btn-block"
+              className="btn btn-info btn-lg btn-block"
               disabled={this.state.loading}
               type="submit"
             >
               {this.state.loading && (
               <span className="spinner-border spinner-border-sm" />
                 )}
-              <span>Add Shipping Address and Buy Items</span>
+              <span>Confirm personal data and shipping</span>
             </button>
           </div>
           <CheckButton
