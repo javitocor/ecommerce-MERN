@@ -133,12 +133,12 @@ class NavBar extends Component {
               </>
             )}
               {loggedIn && (
-              <li className="nav-item d-flex justify-content-center align-items-center">
+              <li className="nav-item ">
                 <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i className={`fas fa-id-card ${navbar.icon}`} />
                   {customer.customer.username}
                 </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <Link
                     to={{
                       pathname: `/customer/${customer.customer.username}`,
