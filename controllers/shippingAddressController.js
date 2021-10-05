@@ -58,10 +58,11 @@ exports.shippingAddress_update = async (req, res, next) => {
       });
     };
     try {
+      const shippingAddress = null;
       if (!req.body.order) {
-        const shippingAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, { $set: req.body, updated_at: Date.now() }, {new: true});
+        shippingAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, { $set: req.body, updated_at: Date.now() }, {new: true});
       } else {
-        const shippingAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, { $push: {"order": req.body.order}, updated_at: Date.now() }, {new: true});
+        shippingAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, { $push: {"order": req.body.order}, updated_at: Date.now() }, {new: true});
       }
       
       res.status(200);

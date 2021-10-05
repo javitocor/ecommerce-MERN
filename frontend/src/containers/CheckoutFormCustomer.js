@@ -8,7 +8,7 @@ import React, {useState, useEffect} from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import CustomerFormAddShipping from './CustomerFormAddShipping';
 import {shippingAddressByCustomer, CreateCall, UpdateCall} from '../helpers/apiCalls';
@@ -36,7 +36,7 @@ const CheckoutFormCustomer = props => {
 
   function handleChange (event) {
     if (event.target.name === 'shippingAddress') {
-      setShipping(event.target.checked);
+      setShipping(event.target.value);
     }
   }
 
@@ -72,7 +72,7 @@ const CheckoutFormCustomer = props => {
     setLoading(false);
     history.push(
       {
-        pathname: `/customer/${customer.customer.name}`,
+        pathname: `/customer/${customer.customer.username}`,
         state: { id: customer.customer._id }
       }
     )
@@ -96,8 +96,8 @@ const CheckoutFormCustomer = props => {
               <>
                 <input type="radio" name="shippingAddress" id="free" value={address._id} onChange={handleChange} checked={shipping === address._id} />
                 <label className="d-flex flex-row justify-content-between align-items-center" htmlFor="free">
-                  <div className="left">{address.name}</div>
-                  <div className="center">
+                  <div className={style.left}>{address.name}</div>
+                  <div className={style.center}>
                     <div className="row text-left h-100">
                       <div className="col-3">
                         Address:
@@ -191,4 +191,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   updateInstance: UpdateCall,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutFormCustomer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CheckoutFormCustomer));

@@ -20,7 +20,8 @@ import generateKey from '../helpers/generateKey';
 import style from '../style/Checkout.module.css';
 
 const Checkout = props => {
-  const {cookies, getCart, loggedIn} = props;
+  const {cookies, getCart, auth} = props;
+  const {loggedIn} = auth;
   const {cookie} = cookies;
   const [products, setProducts] = useState([]);
   const [totalItems, setTotal] = useState(0);
@@ -40,7 +41,7 @@ const Checkout = props => {
     })();
   }, []);
 
-  
+  console.log()
   return (
     <main className="mt-5 pt-4">
       <div className="container wow fadeIn">

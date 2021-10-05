@@ -90,6 +90,10 @@ class CustomerFormAddShipping extends Component  {
             }}
         >  
           <div className="md-form mb-5">
+            <Input type="text" id="name" name="name" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
+            <label htmlFor="name" className="">Name</label>
+          </div>
+          <div className="md-form mb-5">
             <Input type="text" id="address" name="address" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="address" className="">Address</label>
           </div>

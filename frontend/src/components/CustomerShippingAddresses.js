@@ -11,7 +11,7 @@ const CustomerShippingAddresses = props => {
   function handleDelete(addressId) {
     remove('shippingAddress', addressId)
   }
-
+  
   return (
     <div className="container-fluid">
       <div className="form cf mt-5">
@@ -70,7 +70,7 @@ const CustomerShippingAddresses = props => {
                     <i className="far fa-edit mr-2" />
                     Edit
                   </Link>
-                  <div className="btn btn-danger" onClick={handleDelete(address._id)}>
+                  <div className="btn btn-danger" onClick={()=>handleDelete(address._id)}>
                     <i className="fas fa-trash-alt mr-2" />
                     {' '}
                     Delete

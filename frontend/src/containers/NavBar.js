@@ -108,7 +108,7 @@ class NavBar extends Component {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link
                     to={{
-                      pathname: `/customer/${customer.customer.name}`,
+                      pathname: `/customer/${customer.customer.username}`,
                       state: { id: customer.customer._id }
                     }}
                     className="dropdown-item"

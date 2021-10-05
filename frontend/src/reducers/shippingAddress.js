@@ -13,7 +13,7 @@ const shippingAddressReducer = (state = initialStateShippingAddresses, action) =
       return {
         ...state,
         pending: false,
-        shippingAddressesList: action.shippingAddressesList,
+        shippingList: action.shippingAddressesList,
       };
     case SHIPPING_ADDRESSES_PENDING:
       return {
@@ -36,14 +36,14 @@ const shippingAddressReducer = (state = initialStateShippingAddresses, action) =
       return {
         ...state,
         pending: false,
-        shippingAddressesList: [...state.shippingAddressesList, action.shippingAddress],
+        shippingList: [...state.shippingList, action.shippingAddress],
         shippingAddress: action.shippingAddress,
       };
     case UPDATE_SHIPPING_ADDRESS:
       return {
         ...state,
         pending: false,
-        shippingAddressesList: state.shippingAddressesList.map(shippingAddress => {
+        shippingList: state.shippingList.map(shippingAddress => {
           shippingAddress._id === action.id ? shippingAddress = action.shippingAddress : shippingAddress
         }),
         shippingAddress: action.shippingAddress
@@ -52,7 +52,7 @@ const shippingAddressReducer = (state = initialStateShippingAddresses, action) =
       return {
         ...state,
         pending: false,
-        shippingAddressesList: state.shippingAddressesList.filter(shippingAddress => shippingAddress._id !== action.id),
+        shippingList: state.shippingList.filter(shippingAddress => shippingAddress._id !== action.id),
         shippingAddress: {},
       }; 
     default:

@@ -10,11 +10,11 @@ import style from '../style/CustomerOrders.module.css';
 
 const CustomerOrders = props => {
   const {orders, remove} = props;
-  console.log(orders)
+  
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-12">
           <div className={style.peoplenearby}>
             {orders.map(order=>(
               <div className={style.nearbyuser}>
@@ -43,7 +43,7 @@ const CustomerOrders = props => {
                     </p>
                   </div>
                   <div className="col-md-3 col-sm-3">
-                    <button className="btn btn-primary">Cancel</button>
+                    <button className="btn btn-primary" onClick={()=>remove('orders', order._id)}>Cancel</button>
                   </div>
                 </div>
               </div>
