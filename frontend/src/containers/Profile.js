@@ -190,4 +190,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   deleteInstance: DeleteCall,
 }, dispatch);
 
-connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

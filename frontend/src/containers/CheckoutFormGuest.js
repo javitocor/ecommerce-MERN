@@ -7,7 +7,8 @@
 import React, { Component} from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { bindActionCreators } from 'redux';
+import { Link, withRouter } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
@@ -85,20 +86,21 @@ class CheckoutFormGuest extends Component  {
       loading: true,
     });
     this.form.validateAll();
+    const {confirmOrder} = this.props;
     const {customer} = this.props.auth;
     const {cookie} = this.props.cookies;
     const token = this.getCookie('csrftoken');
     if (this.checkBtn.context._errors.length === 0) {
-      await guestConfirmOrder(this.state, token, cookie);
+      const newCust = await confirmOrder(this.state, token, cookie);
       this.props.history.push(
         {
-          pathname: `/customer/${customer.customer.name}`,
-          state: { id: customer.customer._id }
+          pathname: `/customer/${newCust.username}`,
+          state: { id: newCust._id }
         }
       )
       this.setState({
         loading: false,
-      });
+      });    
     } else {
       this.setState({
         loading: false,
@@ -118,41 +120,41 @@ class CheckoutFormGuest extends Component  {
         >
           <div className="row">
             <div className="col-md-6 mb-2">
-              <div className="md-form ">
+              <div className={style.mdform}>
                 <Input type="text" name="firstname" id="firstName" className="form-control" onChange={this.handleChange} validations={[required]} />
                 <label htmlFor="firstName" className="">First name</label>
               </div>
             </div>
             <div className="col-md-6 mb-2">
-              <div className="md-form">
+              <div className={style.mdform}>
                 <Input type="text" name="lastname" id="lastName" className="form-control" onChange={this.handleChange} validations={[required]} />
                 <label htmlFor="lastName" className="">Last name</label>
               </div>
             </div>
           </div>
-          <div className="md-form input-group pl-0 mb-5">
+          <div className={`${style.mdform} input-group pl-0 mb-5`}>
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">@</span>
             </div>
-            <Input type="text" className="form-control py-0" placeholder="Username" aria-describedby="basic-addon1" />
+            <Input type="text" name="username" className="form-control py-0" placeholder="Username" aria-describedby="basic-addon1" onChange={this.handleChange} />
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="email" name="email" className="form-control" placeholder="youremail@example.com" onChange={this.handleChange} validations={[required, email]} />
             <label htmlFor="email" className="">Email</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="password" id="password" name="password" className="form-control" placeholder="Add your password" onChange={this.handleChange} validations={[required, vpassword]} />
             <label htmlFor="address" className="">Password</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="phone" name="phone" className="form-control" placeholder="Add your phone number" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="address" className="">Phone</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="address" name="address" className="form-control" placeholder="Apartment or suite" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="address" className="">Address</label>
           </div>
-          <div className="md-form mb-5">
+          <div className={`${style.mdform} mb-5`}>
             <Input type="text" id="city" name="city" className="form-control" placeholder="Add city" onChange={this.handleChange} validations={[required]} />
             <label htmlFor="city" className="">City</label>
           </div>
@@ -166,7 +168,7 @@ class CheckoutFormGuest extends Component  {
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="state">State</label>
-              <Input className="custom-select d-block w-100" id="state" name="state" validations={[required]} />
+              <Input type='text' className="form-control" id="state" name="state" validations={[required]} />
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="zip">Zip Code</label>
@@ -215,6 +217,7 @@ CheckoutFormGuest.propTypes = {
   cookies: PropTypes.shape({
     cookie: PropTypes.object,
   }).isRequired,
+  confirmOrder: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -227,6 +230,10 @@ const mapStateToProps = state => ({
   },
 });
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  confirmOrder: guestConfirmOrder
+}, dispatch);
 
 
-export default connect(mapStateToProps, null)(CheckoutFormGuest);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CheckoutFormGuest));

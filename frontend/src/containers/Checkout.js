@@ -16,6 +16,7 @@ import CheckoutFormGuest from './CheckoutFormGuest';
 import CheckoutFormCustomer from './CheckoutFormCustomer';
 import {getCookieData} from '../actions/cookies';
 import cartData from '../helpers/cartData';
+import generateKey from '../helpers/generateKey';
 import style from '../style/Checkout.module.css';
 
 const Checkout = props => {
@@ -43,12 +44,12 @@ const Checkout = props => {
   return (
     <main className="mt-5 pt-4">
       <div className="container wow fadeIn">
-        <h2 className="my-5 h2 text-center">{loggedIn ? 'Checkout Info': 'Checkout form}'}</h2>
+        <h2 className="my-5 h2 text-center">{loggedIn ? 'Checkout Info': 'Checkout form'}</h2>
         <div className="row">
           <div className="col-md-8 mb-4">
             {loggedIn 
             ? <CheckoutFormCustomer />
-            : <CheckoutFormGuest />
+            : <CheckoutFormGuest  />
             } 
           </div>
           <div className="col-md-4 mb-4">
@@ -90,19 +91,9 @@ const Checkout = props => {
                   {order.get_cart_total}
                 </strong>
               </li>
-            </ul>
-            <form className="card p-2">
-              <div className="input-group">
-                <div className="input-group-append">
-                  <button className="btn btn-secondary btn-md m-0" type="button">Confirm Purchase</button>
-                </div>
-              </div>
-            </form>
-
+            </ul>  
           </div>
-
         </div>
-
       </div>
       <footer className="page-footer text-center font-small mt-4 wow fadeIn">
 

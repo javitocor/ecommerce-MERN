@@ -6,21 +6,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import style from '../style/CustomerOrders.module.css';
 
 const CustomerOrders = props => {
   const {orders, remove} = props;
-
+  console.log(orders)
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-8">
-          <div className="people-nearby">
+          <div className={style.peoplenearby}>
             {orders.map(order=>(
-              <div className="nearby-user">
+              <div className={style.nearbyuser}>
                 <div className="row">
-                  <div className="col-md-2 col-sm-2">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" className="profile-photo-lg" />
-                  </div>
                   <div className="col-md-7 col-sm-7">
                     <h5><a href="#" className="profile-link">{order._id}</a></h5>
                     <p className={order.complete ? 'text-success' : 'text-warning'}>
@@ -45,7 +43,7 @@ const CustomerOrders = props => {
                     </p>
                   </div>
                   <div className="col-md-3 col-sm-3">
-                    <button className="btn btn-primary pull-right" onClick={remove('orders', order._id)}>Cancel</button>
+                    <button className="btn btn-primary">Cancel</button>
                   </div>
                 </div>
               </div>

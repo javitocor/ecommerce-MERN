@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../actions/auth";
+import { customerLogout } from "../AuthenticationServices/authService";
 import {getCookieData} from '../actions/cookies';
 import navbar from '../style/NavBar.module.css'
 
@@ -177,7 +177,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCart: getCookieData,
-  logout
+  logout: customerLogout
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
