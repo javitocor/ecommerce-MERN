@@ -58,7 +58,7 @@ exports.shippingAddress_update = async (req, res, next) => {
       });
     };
     try {
-      const shippingAddress = null;
+      let shippingAddress = null;
       if (!req.body.order) {
         shippingAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, { $set: req.body, updated_at: Date.now() }, {new: true});
       } else {

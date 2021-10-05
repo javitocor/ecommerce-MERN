@@ -105,18 +105,18 @@ class CustomerFormAddShipping extends Component  {
           <div className="row">
             <div className="col-lg-4 col-md-12 mb-4">
               <label htmlFor="country">Country</label>
-              <Select className="custom-select d-block w-100" name="country" id="country" validations={[required]}>
+              <Select className="custom-select d-block w-100" name="country" id="country" validations={[required]} onChange={this.handleChange}>
                 <option value="">Choose...</option>
                 {dropMenuCountries}
               </Select>
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="state">State</label>
-              <Input type='text' className="form-control" id="state" name="state" validations={[required]} />
+              <Input type='text' className="form-control" id="state" name="state" validations={[required]} onChange={this.handleChange} />
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="zip">Zip Code</label>
-              <Input type="text" name="zipcode" className="form-control" id="zip" placeholder="" validations={[required]} onChange={this.handleChange} />
+              <Input type="text" name="zipcode" className="form-control" id="zip" validations={[required]} onChange={this.handleChange} />
             </div>
           </div>
           <hr />
