@@ -28,7 +28,7 @@ const CustomerShippingAddresses = props => {
           {addresses.map(address => (
             <>
               <label className="d-flex flex-row justify-content-between align-items-center mb-3" htmlFor="free">
-                <div className={style.left}>Basic</div>
+                <div className={style.left}>{address.name}</div>
                 <div className={style.center}>
                   <div className="row text-left h-100">
                     <div className="col-3">

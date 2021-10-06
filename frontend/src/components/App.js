@@ -11,6 +11,7 @@ import PreCheckout from '../containers/PreCheckout';
 import Cart from '../containers/Cart';
 import Profile from '../containers/Profile';
 import AdminPanel from '../containers/AdminPanel';
+import NotFound from './NotFound';
 import ProtectedRoute from '../containers/ProtectedRoute';
 import { clearMessage } from "../actions/message";
 import history from '../history';
@@ -40,6 +41,7 @@ class App extends React.Component {
             <Route exact path="/signup" component={Signup} />
             <ProtectedRoute exact path="/customer/:name" component={Profile} />
             <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
+            <Route component={NotFound} />
           </>
         </Switch>
       </Router>
