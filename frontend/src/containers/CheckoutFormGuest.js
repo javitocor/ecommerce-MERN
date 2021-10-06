@@ -15,6 +15,7 @@ import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { COUNTRIES} from '../constants/constants';
+import {deleteCookieData} from '../actions/cookies';
 import guestConfirmOrder from '../helpers/guestConfirmOrder';
 import style from '../style/CheckoutFormGuest.module.css';
 
@@ -86,12 +87,13 @@ class CheckoutFormGuest extends Component  {
       loading: true,
     });
     this.form.validateAll();
-    const {confirmOrder} = this.props;
+    const {confirmOrder, deleteCookie} = this.props;
     const {customer} = this.props.auth;
     const {cookie} = this.props.cookies;
     const token = this.getCookie('csrftoken');
     if (this.checkBtn.context._errors.length === 0) {
       const newCust = await confirmOrder(this.state, token, cookie);
+      await deleteCookie('cart');
       this.props.history.push(
         {
           pathname: `/customer/${newCust.customer.username}`,
@@ -218,6 +220,7 @@ CheckoutFormGuest.propTypes = {
     cookie: PropTypes.object,
   }).isRequired,
   confirmOrder: PropTypes.func.isRequired,
+  deleteCookie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -231,7 +234,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  confirmOrder: guestConfirmOrder
+  confirmOrder: guestConfirmOrder,
+  deleteCookie: deleteCookieData
 }, dispatch);
 
 

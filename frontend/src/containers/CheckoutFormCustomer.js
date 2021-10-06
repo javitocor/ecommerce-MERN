@@ -13,12 +13,13 @@ import { Link, withRouter } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import CustomerFormAddShipping from './CustomerFormAddShipping';
 import {shippingAddressByCustomer, CreateCall, UpdateCall} from '../helpers/apiCalls';
+import {deleteCookieData} from '../actions/cookies';
 import cartData from '../helpers/cartData';
 import style from '../style/CheckoutFormCustomer.module.css';
 
 
 const CheckoutFormCustomer = props => {
-  const {getAddress, auth, shippingAddress, createInstance, updateInstance, cookies, history} = props;
+  const {getAddress, auth, shippingAddress, createInstance, updateInstance, cookies, history, deleteCookie} = props;
   const {cookie} = cookies;
   const {customer} = auth;
   const {shippingList, pending} = shippingAddress;
@@ -74,6 +75,7 @@ const CheckoutFormCustomer = props => {
       }
       await createInstance('orderItems', token, temp);
     }
+    await deleteCookie('cart');
     setLoading(false);
     history.push(
       {
@@ -173,7 +175,8 @@ CheckoutFormCustomer.propTypes = {
   }).isRequired,
   getAddress: PropTypes.func.isRequired,
   createInstance: PropTypes.func.isRequired,
-  updateInstance: PropTypes.func.isRequired
+  updateInstance: PropTypes.func.isRequired,
+  deleteCookie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -195,6 +198,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getAddress: shippingAddressByCustomer,
   createInstance: CreateCall,
   updateInstance: UpdateCall,
+  deleteCookie: deleteCookieData,
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CheckoutFormCustomer));
