@@ -52,28 +52,8 @@ const Cart = (props) => {
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col-md-9 col-sm-8 mt-5 d-flex flex-column align-items-center justify-content-end w-100">
         <div className="row w-100">
-          <div className="col-md-12">
-            <ol className="breadcrumb">
-              <li>
-                <Link
-                  to='/'
-                  className=""
-                  id="list-home-list"
-                  data-toggle="list"
-                  role="tab"
-                  aria-controls="home"
-                >
-                  Home
-                  {' '}
-                </Link>
-              </li>
-              <li className="active">
-                /
-                {' '}
-                {' '}
-                Cart
-              </li>
-            </ol>
+          <div className={`col-md-12 mb-3 ${style.backg}`}>
+            <h3 className="text-center">Your Cart</h3>
           </div>
         </div>
         <div className="row w-100">
