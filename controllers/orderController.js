@@ -81,7 +81,14 @@ exports.order_delete = async (req, res, next) => {
 
 exports.order_by_customer = async (req, res, next) => {
   try {
-    const orders_by_customer = await Order.find({customer: req.params.customer}).sort({ created_at: -1 });
+    let orders_by_customer = [];
+    const orders = await Order.find({customer: req.params.customer}).sort({ created_at: -1 });
+    for (const order of orders) {
+      const totalItems = await order.getTotalItems();
+      const totalAmount = await order.getCartTotal();
+      const shipping = await ShippingAddress.findOne({order: order._id});
+      orders_by_customer.push({order, totalItems, totalAmount, shipping: shipping.name});
+    }
     res.status(200);
     res.json({message: 'Orders by customer Successful', orders_by_customer});
   } catch (error) {

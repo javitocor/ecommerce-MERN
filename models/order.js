@@ -22,8 +22,12 @@ OrderSchema.methods.getTotalItems = async function() {
 }
 
 OrderSchema.methods.getCartTotal = async function() {
-  const totalItems = await OrderItem.find({ order: this._id})
-  const total = totalItems.reduce((previousValue, currentValue) => { return previousValue + currentValue.getTotalPrice() }, 0 )
+  const totalItems = await OrderItem.find({ order: this._id});
+  const total = await totalItems.reduce(async (previousValue, currentValue) => { 
+    const totalpriceItem = await currentValue.getTotalPrice();
+    const sum = await previousValue;
+    return sum + totalpriceItem
+  }, 0 )
   return total;
 }
 

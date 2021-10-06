@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-shadow */
 /* eslint-disable no-plusplus */
@@ -64,12 +65,12 @@ const CheckoutFormCustomer = props => {
     const order = await createInstance('orders', token, {});
     const data = {order: order.order._id}
     const shipping = await updateInstance('shippingAddress', token, data, addressId);
-    const cartObject = cartData(cookie);
-    for(let i; i < cartObject.items; i++) {
+    const cartObject = await cartData(cookie);
+    for(const item of cartObject.items) {
       const temp = {
-        product: cartObject.items[i]._id,
+        product: item._id,
         order: order.order._id,
-        quantity: cartObject.items[i].quantity,
+        quantity: item.quantity,
       }
       await createInstance('orderItems', token, temp);
     }
