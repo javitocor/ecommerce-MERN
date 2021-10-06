@@ -54,7 +54,7 @@ const Profile = props => {
   return customer === undefined ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
     <div className={`container ${style.empprofile}`}>
       <div>
-        <div className="row">
+        <div className="row mb-4">
           <div className="col-md-4">
             <div className={style.profileimg}>
               <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" />
@@ -69,9 +69,9 @@ const Profile = props => {
               <h6>
                 Since: 
                 {' '}
-                {customer.customer.created_at}
+                {customer.customer.created_at.substring(0,10)}
               </h6>
-              <ul className="nav nav-tabs" id="myTab" role="tablist">
+              <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
                 <li className="nav-item">
                   <a className="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Orders</a>
                 </li>

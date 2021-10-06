@@ -18,9 +18,15 @@ const CustomerOrders = props => {
           <div className={style.peoplenearby}>
             {orders.map(order=>(
               <div className={style.nearbyuser}>
-                <div className="row">
-                  <div className="col-md-7 col-sm-7">
-                    <h5><a href="#" className="profile-link">{order._id}</a></h5>
+                <div className="row w-100 d-flex flex-row justify-content-between align-items-center">
+                  <div className="col-md-8 col-sm-8">
+                    <h5>
+                      <a href="#" className="profile-link">
+                        Order ID:
+                        {' '}
+                        {order._id}
+                      </a>
+                    </h5>
                     <p className={order.complete ? 'text-success' : 'text-warning'}>
                       Status:
                       {' '}
@@ -42,8 +48,9 @@ const CustomerOrders = props => {
                       {order.totalAmount}
                     </p>
                   </div>
-                  <div className="col-md-3 col-sm-3">
-                    <button className="btn btn-primary" onClick={()=>remove('orders', order._id)}>Cancel</button>
+                  <div className="col-md-4 col-sm-4 d-flex flex-column justify-content-center align-items-center">
+                    <button className="btn btn-info mb-3">Go to Order</button>
+                    <button className="btn btn-danger" onClick={()=>remove('orders', order._id)}>Cancel Order</button>
                   </div>
                 </div>
               </div>
