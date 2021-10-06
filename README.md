@@ -25,7 +25,7 @@ Things you may want to c<!--
 
 # eCommerce-MERN
 
->  A eCommerce website where guests or logged in customers can add items to cart and checkout. Built with MERN stack and Redux.
+>  An eCommerce website where guests or logged in customers can add items to cart and checkout. Built with MERN stack and Redux.
 
 Additional description about the project and its features.
 
