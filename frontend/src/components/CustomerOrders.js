@@ -53,6 +53,11 @@ const CustomerOrders = props => {
                       {' '}
                       {order.totalAmount}
                     </p>
+                    <p className="text-muted">
+                      Date:
+                      {' '}
+                      {order.date_order}
+                    </p>
                   </div>
                   <div className="col-md-4 col-sm-4 d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-info mb-3">Go to Order</button>

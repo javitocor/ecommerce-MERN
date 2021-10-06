@@ -22,7 +22,7 @@ class ProductDetail extends Component {
       numberItems: 1,
     };
   }
-
+  
   async componentDidMount() {
     const { getProduct, location } = this.props;
     const { id } = location.state;

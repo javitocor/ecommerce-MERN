@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import NavBar from "../containers/NavBar";
@@ -41,7 +41,9 @@ class App extends React.Component {
             <Route exact path="/signup" component={Signup} />
             <ProtectedRoute exact path="/customer/:name" component={Profile} />
             <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
-            <Route component={NotFound} />
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
           </>
         </Switch>
       </Router>
