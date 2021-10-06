@@ -30,13 +30,13 @@ const CustomerOrders = props => {
                       <a href="#" className="profile-link">
                         Order ID:
                         {' '}
-                        {order._id}
+                        {order.order._id}
                       </a>
                     </h5>
-                    <p className={order.complete ? 'text-success' : 'text-warning'}>
+                    <p className={order.order.complete ? 'text-success' : 'text-warning'}>
                       Status:
                       {' '}
-                      {order.complete ? 'Complete' : 'Pending'}
+                      {order.order.complete ? 'Complete' : 'Pending'}
                     </p>
                     <p>
                       Shipping:
@@ -56,7 +56,7 @@ const CustomerOrders = props => {
                     <p className="text-muted">
                       Date:
                       {' '}
-                      {order.date_order}
+                      {order.order.date_order.substring(0, 10)}
                     </p>
                   </div>
                   <div className="col-md-4 col-sm-4 d-flex flex-column justify-content-center align-items-center">
