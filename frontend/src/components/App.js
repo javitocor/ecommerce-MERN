@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from '../containers/Login';
@@ -11,25 +12,39 @@ import Cart from '../containers/Cart';
 import Profile from '../containers/Profile';
 import AdminPanel from '../containers/AdminPanel';
 import ProtectedRoute from '../containers/ProtectedRoute';
+import { clearMessage } from "../actions/message";
 import history from '../history';
 
-const App = () => (
-  <Router history={history}>
-    <Switch>
-      <>
-        <Route path="/" component={NavBar} />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/product/:name" component={ProductDetail} />
-        <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/precheckout" component={PreCheckout} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <ProtectedRoute exact path="/customer/:name" component={Profile} />
-        <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
-      </>
-    </Switch>
-  </Router>
-);
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    history.listen((location) => {
+      props.dispatch(clearMessage()); // clear message when changing location
+    });
+  }
+
+  render() {
+    return (
+      <Router history={history}>
+        <Switch>
+          <>
+            <Route path="/" component={NavBar} />
+            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path="/product/:name" component={ProductDetail} />
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/precheckout" component={PreCheckout} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <ProtectedRoute exact path="/customer/:name" component={Profile} />
+            <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
+          </>
+        </Switch>
+      </Router>
+    )
+  }
+};
 
 export default App;
