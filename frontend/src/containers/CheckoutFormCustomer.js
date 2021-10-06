@@ -23,11 +23,13 @@ const CheckoutFormCustomer = props => {
   const {shippingList, pending} = shippingAddress;
   const [chosenAddress, setShipping] = useState();
   const [loading, setLoading] = useState(false);
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         await getAddress(customer.customer._id);
+        setIsPending(false)
       } catch (error) {
         console.log(error)
       }           
@@ -57,9 +59,11 @@ const CheckoutFormCustomer = props => {
 
   async function proceed(addressId) {
     setLoading(true);
+    setIsPending(true);
     const token = getCookie('csrftoken');
     const order = await createInstance('orders', token, {});
-    const shipping = await updateInstance('shippingAddress', token, {order: order._id}, addressId);
+    const data = {order: order.order._id}
+    const shipping = await updateInstance('shippingAddress', token, data, addressId);
     const cartObject = cartData(cookie);
     for(let i; i < cartObject.items; i++) {
       const temp = {
@@ -80,13 +84,12 @@ const CheckoutFormCustomer = props => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(chosenAddress)
     proceed(chosenAddress);
   }
 
   
 
-  return pending ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
+  return isPending ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
     <div>
       {shippingList.length === 0 
       ? <CustomerFormAddShipping proceed={proceed} /> 

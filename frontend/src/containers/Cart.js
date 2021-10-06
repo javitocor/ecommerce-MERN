@@ -62,7 +62,7 @@ const Cart = (props) => {
               <div className="card-header">
                 <h3>
                   <img className="rounded img-thumbnail mr-4" src="https://bootdey.com/img/Content/user_3.jpg" />
-                  {customer.customer ? customer.customer.username : 'Guest Customer'}
+                  {customer != null ? customer.customer.username : 'Guest Customer'}
                 </h3>
               </div>
               <div className="card-body"> 

@@ -16,7 +16,13 @@ const CustomerOrders = props => {
       <div className="row">
         <div className="col-md-12">
           <div className={style.peoplenearby}>
-            {orders.map(order=>(
+            {orders.length === 0 
+            ? (
+              <div className="d-flex justify-content-center align-items-center w-100">
+                <h3>No Orders</h3>
+              </div>
+              )
+            :orders.map(order=>(
               <div className={style.nearbyuser}>
                 <div className="row w-100 d-flex flex-row justify-content-between align-items-center">
                   <div className="col-md-8 col-sm-8">

@@ -18,6 +18,7 @@ const Profile = props => {
   const {customer} = auth;
   const {ordersList} = orders;
   const {shippingList} = shippingAddress;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -25,6 +26,7 @@ const Profile = props => {
         await getCustomer('customers', id);
         await getOrders(id);
         await getShipping(id);
+        setLoading(false);
       } catch (error) {
         console.log(error)
       }           
@@ -51,7 +53,7 @@ const Profile = props => {
     await deleteInstance(route, token, instanceId)
   }
   
-  return customer === undefined ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
+  return loading ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
     <div className={`container ${style.empprofile}`}>
       <div>
         <div className="row mb-4">
