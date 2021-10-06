@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -16,6 +17,13 @@ const CustomerShippingAddresses = props => {
   return (
     <div className="container-fluid">
       <div className={`${style.form} ${style.cf} mt-5"`}>
+        <div className="d-flex align-items-center justify-content-end p-3">
+          <button className="btn btn-info btn-lg">
+            <i className="fas fa-plus" />
+            {' '}
+            Add Shipping Address
+          </button>
+        </div>
         <section className={`${style.plan} ${style.cf} d-flex flex-column"`}>
           {addresses.map(address => (
             <>
