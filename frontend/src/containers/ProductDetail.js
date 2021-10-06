@@ -134,38 +134,6 @@ class ProductDetail extends Component {
           </div>
 
         </div>
-        <footer className={`${style.pagefooter} text-center font-small mt-4 wow fadeIn`}>
-          <hr className="my-4" />
-          <div className="pb-4">
-            <a href="#" target="_blank">
-              <i className="fab fa-facebook-f mr-3" />
-            </a>
-
-            <a href="#" target="_blank">
-              <i className="fab fa-twitter mr-3" />
-            </a>
-
-            <a href="#" target="_blank">
-              <i className="fab fa-youtube mr-3" />
-            </a>
-
-            <a href="#" target="_blank">
-              <i className="fab fa-pinterest mr-3" />
-            </a>
-
-            <a href="#" target="_blank">
-              <i className="fab fa-github mr-3" />
-            </a>
-
-            <a href="#" target="_blank">
-              <i className="fab fa-codepen mr-3" />
-            </a>
-          </div>
-            <div className="footer-copyright py-3">
-              © 2021 Copyright: JaviCorp      
-            </div>
-
-        </footer>
       </main>
   
     );
