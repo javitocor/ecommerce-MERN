@@ -59,7 +59,7 @@ const Checkout = props => {
             </h4>
             <ul className={`list-group mb-3 z-depth-1 ${style.shadowcart}`}>
               {products && products.map(product =>(
-                <li className="list-group-item d-flex justify-content-between lh-condensed">
+                <li key={`${product._id}as`} className="list-group-item d-flex justify-content-between lh-condensed">
                   <div>
                     <h6 className="my-0">
                       {product.product.name.substr(0, 19)}

@@ -23,7 +23,7 @@ const CustomerOrders = props => {
               </div>
               )
             :orders.map(order=>(
-              <div className={style.nearbyuser}>
+              <div key={order._id} className={style.nearbyuser}>
                 <div className="row w-100 d-flex flex-row justify-content-between align-items-center">
                   <div className="col-md-8 col-sm-8">
                     <h5>

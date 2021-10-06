@@ -27,7 +27,7 @@ const CustomerShippingAddresses = props => {
         <section className={`${style.plan} ${style.cf} d-flex flex-column"`}>
           {addresses.map(address => (
             <>
-              <label className="d-flex flex-row justify-content-between align-items-center mb-3" htmlFor="free">
+              <label key={address._id} className="d-flex flex-row justify-content-between align-items-center mb-3" htmlFor="free">
                 <div className={style.left}>{address.name}</div>
                 <div className={style.center}>
                   <div className="row text-left h-100">

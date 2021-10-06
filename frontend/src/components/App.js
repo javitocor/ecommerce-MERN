@@ -20,7 +20,7 @@ import history from '../history';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    
     history.listen((location) => {
       props.dispatch(clearMessage()); // clear message when changing location
     });
@@ -41,9 +41,6 @@ class App extends React.Component {
             <Route exact path="/signup" component={Signup} />
             <ProtectedRoute exact path="/customer/:name" component={Profile} />
             <ProtectedRoute exact path="/adminPanel" component={AdminPanel} />
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
           </>
         </Switch>
       </Router>

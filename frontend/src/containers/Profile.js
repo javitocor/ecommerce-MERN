@@ -25,8 +25,8 @@ const Profile = props => {
       try {
         await getCustomer('customers', id);
         await getOrders(id);
-        await getShipping(id);
         setLoading(false);
+        await getShipping(id);
       } catch (error) {
         console.log(error)
       }           
@@ -75,10 +75,10 @@ const Profile = props => {
               </h6>
               <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
                 <li className="nav-item">
-                  <a className="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Orders</a>
+                  <a className={`${style.navlink} nav-link active`} id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Orders</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Addresses</a>
+                  <a className={`${style.navlink} nav-link`} id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Addresses</a>
                 </li>
               </ul>
             </div>
