@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import style from '../style/CustomerShippingAddresses.module.css';
 
 const CustomerShippingAddresses = props => {
   const {addresses, remove} = props;
@@ -14,14 +15,13 @@ const CustomerShippingAddresses = props => {
   
   return (
     <div className="container-fluid">
-      <div className="form cf mt-5">
-        <section className="plan cf d-flex flex-column">
+      <div className={`${style.form} ${style.cf} mt-5"`}>
+        <section className={`${style.plan} ${style.cf} d-flex flex-column"`}>
           {addresses.map(address => (
             <>
-              <input type="radio" name="radio1" id="free" value="free" />
-              <label className="free-label d-flex flex-row justify-content-between align-items-center" htmlFor="free">
-                <div className="left">Basic</div>
-                <div className="center">
+              <label className="d-flex flex-row justify-content-between align-items-center mb-3" htmlFor="free">
+                <div className={style.left}>Basic</div>
+                <div className={style.center}>
                   <div className="row text-left h-100">
                     <div className="col-3">
                       Address:
@@ -48,20 +48,20 @@ const CustomerShippingAddresses = props => {
                       {address.country}
                     </div>
                     <div className="col-3">
-                      Zip Code:
+                      ZipCode:
                     </div>
                     <div className="col-9">
                       {address.zipcode}
                     </div>
                   </div>
                 </div>
-                <div className="right">
+                <div className={style.right}>
                   <Link
                     to={{
                         pathname: `/shippingaddress/${address.name}/edit`,
                         state: { address }
                       }}
-                    className="btn btn-primary"
+                    className="btn btn-dark mb-3"
                     id="list-home-list"
                     data-toggle="list"
                     role="tab"

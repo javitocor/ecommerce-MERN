@@ -16,47 +16,30 @@
 .form label{
 	position: relative;
 	color: #fff;
-	background-color: #aaa;
+	background-color: #17a2b8;
 	font-size: 26px;
 	text-align: center;
 	height: 150px;
 	line-height: 150px;
 	display: block;
-	cursor: pointer;
 	border: 3px solid transparent;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	border: 3px solid black;
 }
 
-.form .plan input:checked + label{
-	border: 3px solid #333;
-	background-color: grey;
-}
-
-.form .plan input:checked + label:after{
-	content: "\2713";
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	border-radius: 100%;
-	border: 2px solid #333;
-	background-color: grey;
-	z-index: 999;
-	position: absolute;
-	top: -10px;
-	right: -10px;
-}
 
 .center {
   width: 55%;
   font-size: 16px;
-    line-height: normal;
-    height: inherit;
-    padding: 13px 5px;
+  line-height: normal;
+  height: inherit;
+  padding: 13px 5px;
 }
 .right{
   width: 20%;
+	line-height: normal;
 }
 .left {
   width: 25%;
