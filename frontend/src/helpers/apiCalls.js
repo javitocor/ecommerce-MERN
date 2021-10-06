@@ -8,6 +8,7 @@ import * as roles from '../actions/roles';
 import * as categories from '../actions/categories';
 import * as orderItems from '../actions/orderItems';
 import * as shippingAddress from '../actions/shippingAddress';
+import { updateCustAuth } from '../actions/auth';
 import {setMessage} from '../actions/message';
 import authHeader from "./authHeader";
 
@@ -314,6 +315,7 @@ export const UpdateCall = (route, token, data, id) => async dispatch => {
     const newData = await response.json();
     if(route==='customers'){
       dispatch(customers.updateCustomer(newData.customer, id));
+      dispatch(updateCustAuth(newData.customer));
     } else if (route==='products') {
       dispatch(products.updateProduct(newData.product, id));
     } else if (route==='orders'){

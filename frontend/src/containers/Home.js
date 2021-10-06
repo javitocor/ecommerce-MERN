@@ -35,7 +35,7 @@ class Home extends Component {
     const { getAll, auth } = this.props;
     const { customer } = auth;
     try {
-      await getAll('products', customer.customer);
+      await getAll('products');
       this.setState({current: this.props.products.productsList.slice(this.state.count.prev, this.state.count.next)})
     } catch (error) {
       console.log(error)

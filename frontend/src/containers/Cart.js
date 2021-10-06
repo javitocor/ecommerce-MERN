@@ -17,7 +17,7 @@ import style from '../style/Cart.module.css';
 
 const Cart = (props) => {
   const {cookies, getCart, updateCart, auth} = props;
-  const {loggedIn} = auth;
+  const {loggedIn, customer} = auth;
   const {cookie} = cookies;
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -62,7 +62,7 @@ const Cart = (props) => {
               <div className="card-header">
                 <h3>
                   <img className="rounded img-thumbnail mr-4" src="https://bootdey.com/img/Content/user_3.jpg" />
-                  {auth.customer.customer ? auth.customer.customer.username : 'Guest Customer'}
+                  {customer.customer ? customer.customer.username : 'Guest Customer'}
                 </h3>
               </div>
               <div className="card-body"> 

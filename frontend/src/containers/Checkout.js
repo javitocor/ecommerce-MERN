@@ -41,7 +41,6 @@ const Checkout = props => {
     })();
   }, []);
 
-  console.log()
   return (
     <main className="mt-2 pt-3">
       <div className="container">

@@ -94,8 +94,8 @@ class CheckoutFormGuest extends Component  {
       const newCust = await confirmOrder(this.state, token, cookie);
       this.props.history.push(
         {
-          pathname: `/customer/${newCust.username}`,
-          state: { id: newCust._id }
+          pathname: `/customer/${newCust.customer.username}`,
+          state: { id: newCust.customer._id }
         }
       )
       this.setState({
@@ -161,14 +161,14 @@ class CheckoutFormGuest extends Component  {
           <div className="row">
             <div className="col-lg-4 col-md-12 mb-4">
               <label htmlFor="country">Country</label>
-              <Select className="custom-select d-block w-100" name="country" id="country" validations={[required]}>
+              <Select className="custom-select d-block w-100" name="country" id="country" onChange={this.handleChange} validations={[required]}>
                 <option value="">Choose...</option>
                 {dropMenuCountries}
               </Select>
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="state">State</label>
-              <Input type='text' className="form-control" id="state" name="state" validations={[required]} />
+              <Input type='text' className="form-control" id="state" name="state" onChange={this.handleChange} validations={[required]} />
             </div>
             <div className="col-lg-4 col-md-6 mb-4">
               <label htmlFor="zip">Zip Code</label>

@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  UPDATE_AUTH_CUSTOMER,
 } from "../constants/constants";
 
 export const signup = () => {
@@ -36,6 +37,13 @@ export const logout = () => {
     type: LOGOUT,    
   };
 };
+
+export const updateCustAuth = customer => {
+  return {
+    type: UPDATE_AUTH_CUSTOMER,
+    customer
+  }
+}
 
 
 

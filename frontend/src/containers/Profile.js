@@ -50,7 +50,7 @@ const Profile = props => {
     const token = getCookie('csrftoken');
     await deleteInstance(route, token, instanceId)
   }
-
+  
   return customer === undefined ? <div className="d-flex justify-content-center align-items-center w-100"><Spinner animation="grow" /></div> : (
     <div className={`container ${style.empprofile}`}>
       <div>

@@ -7,6 +7,7 @@
 import {CreateCall, UpdateCall} from './apiCalls';
 import {customerSignup, customerLogin} from '../AuthenticationServices/authService';
 import cartData from './cartData';
+import { updateCustAuth } from '../actions/auth';
 
 const guestConfirmOrder = (state, token, cookie) => async dispatch => {
   try {
@@ -14,9 +15,8 @@ const guestConfirmOrder = (state, token, cookie) => async dispatch => {
       firstname: state.firstname,
       lastname: state.lastname,
       username: state.username,
-      password: state.password,
       phone: state.phone,
-      email: state.email
+      email: state.email,
     };
     // signup and login new customer
     await dispatch(customerSignup(state.username, state.email, state.password));
@@ -30,6 +30,7 @@ const guestConfirmOrder = (state, token, cookie) => async dispatch => {
       city: state.city,
       state: state.state,
       zipcode: state.zipcode,
+      country: state.country,
       name: 'default',
       customer: customer.customer._id,
       order: order.order._id,
