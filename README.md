@@ -58,14 +58,14 @@ Dashboard:
 ## Getting Started
 ### Usage
 To have this app on your pc, you need to:
-* [download](https://github.com/javitocor/Project-Management-Tool-MERN/archive/main.zip) or clone this repo:
+* [download](https://github.com/javitocor/ecommerce-MERN/archive/main.zip) or clone this repo:
   - Clone with SSH:
   ```
-    git@github.com:javitocor/Project-Management-Tool-MERN.git
+    git@github.com:javitocor/ecommerce-MERN.git
   ```
   - Clone with HTTPS
   ```
-    https://github.com/javitocor/Project-Management-Tool-MERN.git
+    https://github.com/javitocor/ecommerce-MERN.git
   ```
 
 * In the project directory, you can run:
@@ -157,7 +157,7 @@ The cart information is saved in a browser cookie, this allows access to the use
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/javitocor/Project-Management-Tool-MERN/issues).
+Feel free to check the [issues page](https://github.com/javitocor/ecommerce-MERN/issues).
 
 ## Show your support
 
@@ -180,11 +180,11 @@ This project is [MIT](lic.url) licensed.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/javitocor/Project-Management-Tool-MERN.svg?style=flat-square
-[contributors-url]: https://github.com/javitocor/Project-Management-Tool-MERN/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/javitocor/Project-Management-Tool-MERN.svg?style=flat-square
-[forks-url]: https://github.com/javitocor/Project-Management-Tool-MERN/network/members
-[stars-shield]: https://img.shields.io/github/stars/javitocor/Project-Management-Tool-MERN.svg?style=flat-square
-[stars-url]: https://github.com/javitocor/Project-Management-Tool-MERN/stargazers
-[issues-shield]: https://img.shields.io/github/issues/javitocor/Project-Management-Tool-MERN.svg?style=flat-square
-[issues-url]: https://github.com/javitocor/Project-Management-Tool-MERN/issuesover:
+[contributors-shield]: https://img.shields.io/github/contributors/javitocor/ecommerce-MERN.svg?style=flat-square
+[contributors-url]: https://github.com/javitocor/ecommerce-MERN/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/javitocor/ecommerce-MERN.svg?style=flat-square
+[forks-url]: https://github.com/javitocor/ecommerce-MERN/network/members
+[stars-shield]: https://img.shields.io/github/stars/javitocor/ecommerce-MERN.svg?style=flat-square
+[stars-url]: https://github.com/javitocor/ecommerce-MERN/stargazers
+[issues-shield]: https://img.shields.io/github/issues/javitocor/ecommerce-MERN.svg?style=flat-square
+[issues-url]: https://github.com/javitocor/ecommerce-MERN/issuesover:
