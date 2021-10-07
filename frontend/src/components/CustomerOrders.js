@@ -70,7 +70,7 @@ const CustomerOrders = props => {
                           shippingId: order.shipping._id,
                          }
                       }}
-                      className="btn btn-info mb-3"
+                      className="btn btn-info mb-3 text-white"
                       id="list-home-list"
                       data-toggle="list"
                       role="tab"
