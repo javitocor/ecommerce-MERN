@@ -8,9 +8,9 @@ export const getAllShippingAddresses = shippingAddressesList => ({
   shippingAddressesList,
 });
 
-export const getSingleShippingAddress = shippingAddress => ({
+export const getSingleShippingAddress = singleShippingAddress => ({
   type: GET_SINGLE_SHIPPING_ADDRESS,
-  shippingAddress,
+  singleShippingAddress,
 });
 
 export const createShippingAddress = shippingAddress => ({

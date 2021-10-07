@@ -41,7 +41,7 @@ const CustomerOrders = props => {
                     <p>
                       Shipping:
                       {' '}
-                      {order.shipping}
+                      {order.shipping.name}
                     </p>
                     <p className="text-muted">
                       Total Items:
@@ -60,8 +60,31 @@ const CustomerOrders = props => {
                     </p>
                   </div>
                   <div className="col-md-4 col-sm-4 d-flex flex-column justify-content-center align-items-center">
-                    <button className="btn btn-info mb-3">Go to Order</button>
-                    <button className="btn btn-danger" onClick={()=>remove('orders', order._id)}>Cancel Order</button>
+                    <Link
+                      to={{
+                        pathname: `/order/${order.order._id}`,
+                        state: { 
+                          id: order.order._id,
+                          totalItems: order.totalItems,
+                          totalAmount: order.totalAmount,
+                          shippingId: order.shipping._id,
+                         }
+                      }}
+                      className="btn btn-info mb-3"
+                      id="list-home-list"
+                      data-toggle="list"
+                      role="tab"
+                      aria-controls="home"
+                    >
+                      <i className="fas fa-receipt" />
+                      {' '}
+                      Go to Order
+                    </Link>
+                    <button className="btn btn-danger" onClick={()=>remove('orders', order._id)}>
+                      <i className="fas fa-window-close" />
+                      {' '}
+                      Cancel Order
+                    </button>
                   </div>
                 </div>
               </div>

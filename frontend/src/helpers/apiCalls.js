@@ -384,4 +384,18 @@ export const ordersByCustomer = (customerId) => async dispatch => {
   };  
 };
 
+export const itemsByOrder = (orderId) => async dispatch => {
+  try {
+    const url = `${URL_BASIC}orderItems/byorder`;
+    dispatch(orderItems.orderItemsPending());
+    const response = await fetch(`${url}/${orderId}`, { mode: 'cors',   headers: authHeader() });
+    const data = await response.json();
+    dispatch(orderItems.getAllOrderItems(data));
+    return data;
+  } catch (error) {
+    dispatch(orderItems.orderItemsError(error));
+    console.log(error);
+  };
+};
+
 

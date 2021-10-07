@@ -87,7 +87,7 @@ exports.order_by_customer = async (req, res, next) => {
       const totalItems = await order.getTotalItems();
       const totalAmount = await order.getCartTotal();
       const shipping = await ShippingAddress.findOne({order: order._id});
-      orders_by_customer.push({order, totalItems, totalAmount, shipping: shipping.name});
+      orders_by_customer.push({order, totalItems, totalAmount, shipping: {name: shipping.name, _id: shipping._id}});
     }
     res.status(200);
     res.json({message: 'Orders by customer Successful', orders_by_customer});

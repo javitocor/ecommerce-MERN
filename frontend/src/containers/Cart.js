@@ -130,7 +130,7 @@ const Cart = (props) => {
               {loggedIn && (
                 <Link
                   to='/checkout'
-                  className="btn btn-info pull-right"
+                  className="btn btn-info"
                   id="list-home-list"
                   data-toggle="list"
                   role="tab"
@@ -144,7 +144,7 @@ const Cart = (props) => {
               {!loggedIn && (
                 <Link
                   to='/precheckout'
-                  className="btn btn-primary pull-right"
+                  className="btn btn-info"
                   id="list-home-list"
                   data-toggle="list"
                   role="tab"

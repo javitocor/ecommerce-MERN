@@ -95,7 +95,7 @@ export const initialStateShippingAddresses = {
   error: null,
   pending: false,
   shippingList: [],
-  shippingAddress: {},
+  singleShippingAddress: {},
 };
 
 export const GET_ALL_SHIPPING_ADDRESSES = 'GET_ALL_SHIPPING_ADDRESSES';

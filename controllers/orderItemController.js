@@ -65,3 +65,14 @@ exports.orderItem_delete = async (req, res, next) => {
     next();
   }
 };
+
+exports.orderItem_byorder = async function (req, res, next) {
+  try {
+    const order_items_by_order = await  OrderItem.find({order: req.params.order}).populate('product');
+    res.status(200)
+    res.json(order_items_by_order)
+  } catch (error) {
+    res.json(error)
+    next();
+  }
+}

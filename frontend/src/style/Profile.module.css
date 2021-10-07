@@ -70,18 +70,3 @@
   color: #eee;
   text-decoration: none;
 }
-
-.navlink:hover{
-  background-color: gray;
-  color: white;
-}
-
-.navlink.active {
-  background-color:red;
-}
-
-a.navlink.active {
-  /* hot pink, bold text for active tab title */
-  color: #ff3399;
-  font-weight: bolder;
-}

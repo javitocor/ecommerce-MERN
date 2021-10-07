@@ -30,7 +30,7 @@ const shippingAddressReducer = (state = initialStateShippingAddresses, action) =
       return {
         ...state,
         pending: false,
-        shippingAddress: action.shippingAddress,
+        singleShippingAddress: action.singleShippingAddress,
       };
     case CREATE_SHIPPING_ADDRESS:
       return {

@@ -1,0 +1,20 @@
+.cardbox {
+  padding: 20px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: none !important;
+}
+.cardbox svg {
+    font-size: 80px;
+    margin-top: 20px;
+}
+.content {
+  margin: 0 auto;
+  width: 95%;
+  border: 1px solid black;
+  border-radius: 5px;
+  -webkit-box-shadow: -1px 3px 5px 9px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 3px 5px 9px rgba(0,0,0,0.75);
+  box-shadow: -1px 3px 5px 9px rgba(0,0,0,0.75);
+}
