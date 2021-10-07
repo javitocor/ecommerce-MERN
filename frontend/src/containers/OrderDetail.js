@@ -134,8 +134,9 @@ const OrderDetail = props => {
                           {' '}
                         </h6>
                         <ul className="list-inline list-inline-dotted mb-3 mb-lg-2">
-                          <li className="list-inline-item"><a href="#" className="text-muted" data-abc="true">{product.category}</a></li>
-                          <li className="list-inline-item"><a href="#" className="text-muted" data-abc="true">{product.category}</a></li>
+                          {product.product.category.map(cat=>(
+                            <li className="list-inline-item"><a href="#" className="text-muted" data-abc="true">{cat.name}</a></li>
+                          ))}
                         </ul>
                         <p className="mb-3">
                           {product.product.description.substring(0, 100)}
@@ -146,7 +147,7 @@ const OrderDetail = props => {
                           <li className="list-inline-item text-info">
                             Quantity:
                             {' '}
-                            <span className="text-dark">{product.quantity}</span>
+                            <span className="text-dark font-weight-bold">{product.quantity}</span>
                           </li>
                         </ul>
                       </div>
