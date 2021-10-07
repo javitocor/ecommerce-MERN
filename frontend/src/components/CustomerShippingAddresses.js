@@ -18,11 +18,23 @@ const CustomerShippingAddresses = props => {
     <div className="container-fluid">
       <div className={`${style.form} ${style.cf} mt-5"`}>
         <div className="d-flex align-items-center justify-content-end p-3">
-          <button className="btn btn-info btn-lg">
+          <Link
+            to={{
+              pathname: `/shippingaddress/create`,
+              state: { 
+                type: 'create'
+              }
+            }}
+            className="btn btn-info btn-lg"
+            id="list-home-list"
+            data-toggle="list"
+            role="tab"
+            aria-controls="home"
+          >
             <i className="fas fa-plus" />
             {' '}
             Add Shipping Address
-          </button>
+          </Link>
         </div>
         <section className={`${style.plan} ${style.cf} d-flex flex-column"`}>
           {addresses.map(address => (
@@ -67,7 +79,10 @@ const CustomerShippingAddresses = props => {
                   <Link
                     to={{
                         pathname: `/shippingaddress/${address.name}/edit`,
-                        state: { address }
+                        state: { 
+                          address,
+                          type: 'update',
+                        }
                       }}
                     className="btn btn-dark mb-3"
                     id="list-home-list"

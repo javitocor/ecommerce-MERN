@@ -1,0 +1,15 @@
+.content {
+  width: 55%;
+  margin: 2rem auto;
+  -webkit-box-shadow: 7px -1px 18px 0px rgba(48, 50, 50, 0.56);
+  -moz-box-shadow:    7px -1px 18px 0px rgba(48, 50, 50, 0.56);
+  box-shadow:         7px -1px 18px 0px rgba(48, 50, 50, 0.56);
+}
+
+.title {
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  text-decoration: underline;
+  text-align: center;
+}

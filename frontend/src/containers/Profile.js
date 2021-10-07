@@ -25,8 +25,8 @@ const Profile = props => {
       try {
         await getCustomer('customers', id);
         await getOrders(id);
-        setLoading(false);
         await getShipping(id);
+        setLoading(false);
       } catch (error) {
         console.log(error)
       }           
