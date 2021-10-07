@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-shadow */
@@ -23,7 +25,7 @@ const CheckoutFormCustomer = props => {
   const {cookie} = cookies;
   const {customer} = auth;
   const {shippingList, pending} = shippingAddress;
-  const [chosenAddress, setShipping] = useState();
+  const [chosenAddress, setChosenAddress] = useState();
   const [loading, setLoading] = useState(false);
   const [isPending, setIsPending] = useState(true);
 
@@ -39,9 +41,7 @@ const CheckoutFormCustomer = props => {
   }, []);
 
   function handleChange (event) {
-    if (event.target.name === 'shippingAddress') {
-      setShipping(event.target.value);
-    }
+    setChosenAddress(event.target.value);
   }
 
   const getCookie = (name) => {
@@ -97,12 +97,12 @@ const CheckoutFormCustomer = props => {
       {shippingList.length === 0 
       ? <CustomerFormAddShipping proceed={proceed} /> 
       : (
-        <form className={`${style.form} ${style.cf} mt-1 mb-1"`} onSubmit={handleSubmit}>
+        <form className={`${style.form} ${style.cf} mt-1 mb-2"`} onSubmit={handleSubmit}>
           <h3 className="py-3">Choose your Shipping Address:</h3>
-          <section className={`${style.plan} ${style.cf} d-flex flex-column"`}>
+          <section className={`${style.plan} ${style.cf} d-flex flex-column mb-2`}>
             {shippingList.map(address => (
               <>
-                <input type="radio" name="shippingAddress" id="free" value={address._id} onChange={handleChange} checked={chosenAddress === address._id} />
+                <input type="radio" key={address._id} name='address' value={address._id} onChange={handleChange} checked={chosenAddress === address._id} />
                 <label className="d-flex flex-row justify-content-between align-items-center" htmlFor="free">
                   <div className={style.left}>{address.name}</div>
                   <div className={style.center}>

@@ -46,7 +46,7 @@ const Checkout = props => {
       <div className="container">
         <h2 className="my-5 h2 text-center">{loggedIn ? 'Checkout Info': 'Checkout form'}</h2>
         <div className="row">
-          <div className={`col-md-8 mb-4 ${style.shadow}`}>
+          <div className={`col-md-8 mb-4 pb-3 ${style.shadow}`}>
             {loggedIn 
             ? <CheckoutFormCustomer />
             : <CheckoutFormGuest  />
